@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DLL.Interfaces
 {
-    public interface IReviewRepository : IRepository<Review>
+    public interface IReviewRepository : IService<Review>
     {
     }
 }

@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DLL.Interfaces
+namespace BLL.Interfaces
 {
     public interface IService<T>
     {
-        IEnumerable<T> GetAll();
+        void Add(T item);
+        void Update(T item);
+        void DeleteById(int id);
         T GetById(int id);
-        void Add(T entity);
-        void Update(T entity);
-        void Delete(int id);
+        IEnumerable<T> GetAll();
     }
 }

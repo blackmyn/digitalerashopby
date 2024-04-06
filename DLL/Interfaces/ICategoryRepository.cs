@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DLL.Interfaces
 {
-    public interface ICategoryRepository : IRepository<Category>
+    public interface ICategoryRepository : IService<Category>
     {
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DLL.Interfaces
 {
-    public interface IPaymentRepository : IRepository<Payment>
+    public interface IPaymentRepository : IService<Payment>
     {
     }
 }

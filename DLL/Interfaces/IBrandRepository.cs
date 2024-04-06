@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DLL.Interfaces
 {
-    public interface IBrandRepository : IRepository<Brand>
+    public interface IBrandRepository : IService<Brand>
     {
     }
 }
