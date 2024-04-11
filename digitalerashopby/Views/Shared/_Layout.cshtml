@@ -1,0 +1,213 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@ViewBag.Title</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet" />
+    <style>
+        body {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+            font-family: 'Product Sans', sans-serif;
+        }
+
+        main {
+            flex: 1 0 auto;
+        }
+
+        .hero {
+            position: relative;
+            background: url('https://wallpapercrafter.com/desktop/279747-grocery-store-grocery-vegetable-and-carrot-hd.jpg') no-repeat center center;
+            background-size: cover;
+            padding: 10px 0;
+            color: white;
+            text-align: center;
+        }
+
+            .hero::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 0;
+            }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+        }
+
+        nav .nav-wrapper {
+            padding: 0 20px;
+        }
+
+        nav a.brand-logo {
+            font-size: 1.8rem;
+        }
+
+        nav ul a.btn {
+            margin: 10px 5px;
+        }
+
+        nav .sidenav-trigger {
+            color: white;
+        }
+
+        .hero-content a {
+            color: white
+        }
+
+        .icon-block {
+            text-align: center;
+        }
+
+            .icon-block .material-icons {
+                font-size: 4rem;
+            }
+
+        main {
+            padding: 20px;
+        }
+
+
+        table.highlight > tbody > tr:hover {
+            background-color: #f2f2f2;
+        }
+
+        .form-horizontal .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-control {
+            display: block;
+            width: 100%;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+
+    </style>
+</head>
+<body>
+    @using Microsoft.AspNetCore.Identity;
+    <header class="hero">
+        <div class="container hero-content">
+            <h1>
+                <a>@Html.ActionLink("Grocery Shop", "Index", "Home")</a>
+            </h1>
+            <p>Your one-stop shop for fresh produce and quality goods</p>
+        </div>
+    </header>
+
+    <partial name="_LoginPartial" />
+
+    <main>
+        <div id="featured-products" class="section">
+
+            @if (User.IsInRole("ClientManager"))
+            {
+                <div class="section blue lighten-5 text-center">
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="icon-block">
+                                <h2 class="center light-blue-text"><i class="material-icons">person</i></h2>
+                                <h5 class="center">@Html.ActionLink("Client List", "Index", "Client")</h5>
+                                <p class="light">Check out our community of happy customers and their profiles.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            @if (User.IsInRole("Administrator"))
+            {
+                <div class="section blue lighten-5">
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="col s12 m6">
+                                    <div class="icon-block">
+                                        <h2 class="center light-blue-text"><i class="material-icons">shopping_cart</i></h2>
+                                        <h5 class="center">@Html.ActionLink("Browse Products", "Index", "AdminProduct")</h5>
+                                        <p class="light">Explore our wide range of products and add them to your cart.</p>
+                                    </div>
+                                </div>
+
+                                <div class="col s12 m6">
+                                    <div class="icon-block">
+                                        <h2 class="center light-blue-text"><i class="material-icons">receipt</i></h2>
+                                        <h5 class="center">@Html.ActionLink("Order History", "Index", "Order")</h5>
+                                        <p class="light">View your past orders and track your order history.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            else
+            @if (User.IsInRole("Client"))
+            {
+                <div class="section blue lighten-5 text-center">
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="icon-block">
+                                <h2 class="center light-blue-text"><i class="material-icons">shopping_cart</i></h2>
+                                <h5 class="center">@Html.ActionLink("Browse Products", "Index", "Product")</h5>
+                                <p class="light">Explore our wide range of products and add them to your cart.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @RenderBody()
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+
+    <style>
+        .navbar-container {
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px;
+        }
+
+        .navbar-nav {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-item {
+            margin-right: 10px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #000;
+            cursor: pointer;
+        }
+
+            .nav-link:hover {
+                text-decoration: underline;
+            }
+    </style>
+</body>
+</html>

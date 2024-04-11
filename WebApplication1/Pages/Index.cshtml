@@ -1,0 +1,39 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<!-- Блок с информацией слева -->
+<div class="w-1/4 p-4 bg-gray-200">
+    <!-- Ваш блок с информацией -->
+    <p>Здесь может быть ваша информация</p>
+</div>
+
+<!-- Блок с картинками акций -->
+<div class="w-3/4 p-4">
+    <!-- Картинки с акциями -->
+    <div class="grid grid-cols-3 gap-4">
+        <!-- Здесь добавьте код для отображения картинок с акциями -->
+    </div>
+
+    <!-- Пагинация -->
+    <div class="flex justify-center items-center mt-4">
+        <!-- Кнопки пагинации -->
+        <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">
+            Предыдущая
+        </button>
+        <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4">
+            1
+        </button>
+        <!-- Здесь добавьте другие кнопки пагинации -->
+        <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r">
+            Следующая
+        </button>
+    </div>
+
+    <!-- Индикатор текущей страницы -->
+    <div class="flex justify-center items-center mt-2">
+        <p class="text-gray-600">Страница 1 из 5</p>
+    </div>
+</div>

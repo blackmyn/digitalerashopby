@@ -4,12 +4,12 @@ using DLL.DB;
 using DLL.Interfaces;
 using DLL.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add services to the container.
+builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
 var connect = builder.Configuration.GetConnectionString("DefaultConnection");
 
@@ -25,6 +25,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.SlidingExpiration = true;
         options.ReturnUrlParameter = string.Empty;
     });
+
 
 builder.Services.AddAutoMapper(typeof(BLL.Mappers.ApplicationUserMappingProfile));
 builder.Services.AddAutoMapper(typeof(BLL.Mappers.BrandMappingProfile));
@@ -71,10 +72,11 @@ builder.Services.AddScoped<ISpecificationRepository, SpecificationRepository>();
 builder.Services.AddScoped<ISpecificationServce, SpecificationService>();
 
 var app = builder.Build();
-
+// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler();
+    app.UseExceptionHandler("/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -85,64 +87,6 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
-//using (var scope = app.Services.CreateScope())
-//{
-//    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-//    var roles = new[] { "Administrator", "ClientManager", "Client" };
-
-//    foreach (var role in roles)
-//    {
-//        if (!await roleManager.RoleExistsAsync(role))
-//        {
-//            await roleManager.CreateAsync(new IdentityRole(role));
-//        }
-//    }
-//}
-//using (var scope = app.Services.CreateScope())
-//{
-//    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
-//    string email = "admin@admin.com";
-//    string password = "Admin1!";
-//    string name = "AdminUser1";
-//    string email1 = "clientmanager@mail.ru";
-//    string password1 = "ClientManager1!";
-//    string name1 = "ClientManager1";
-//    string email2 = "client@mail.ru";
-//    string password2 = "Client1!";
-//    string name2 = "Client1";
-
-//    if (await userManager.FindByEmailAsync(email) == null)
-//    {
-//        var user = new AppUser();
-//        user.Email = email;
-//        user.UserName = email;
-//        user.Name = name;
-//        await userManager.CreateAsync(user, password);
-//        await userManager.AddToRoleAsync(user, "Administrator");
-
-//    }
-//    if (await userManager.FindByEmailAsync(email2) == null)
-//    {
-
-//        var user2 = new AppUser();
-//        user2.Email = email2;
-//        user2.UserName = email2;
-//        user2.Name = name2;
-//        await userManager.CreateAsync(user2, password2);
-//        await userManager.AddToRoleAsync(user2, "Client");
-//    }
-//    //if (await userManager.FindByEmailAsync(email1) == null)
-//    //{
-//    //    var user1 = new AppUser();
-//    //    user1.Email = email1;
-//    //    user1.UserName = email1;
-//    //    user1.Name = name1;
-//    //    await userManager.CreateAsync(user1, password1);
-//    //    await userManager.AddToRoleAsync(user1, "ClientManager");
-//    //}
+app.MapRazorPages();
 
 app.Run();

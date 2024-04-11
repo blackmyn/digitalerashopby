@@ -1,0 +1,94 @@
+/* Basic header styling */
+header {
+    background-color: #f8f8f8;
+    padding: 15px 0;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h1 {
+    margin: 0; /* Remove default margin */
+}
+
+.search-bar {
+    display: flex;
+}
+
+    .search-bar input[type="text"] {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px 0 0 4px; /* Round left corners only */
+    }
+
+    .search-bar button {
+        padding: 8px;
+        background-color: #eee;
+        border: 1px solid #ccc;
+        border-left: none; /* Remove left border */
+        border-radius: 0 4px 4px 0; /* Round right corners only */
+        cursor: pointer;
+    }
+
+.icons a {
+    margin-left: 15px;
+    text-decoration: none; /* Remove underline */
+    color: #333;
+}
+
+/* Categories navigation */
+.categories ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+    display: flex;
+}
+
+.categories > ul > li {
+    position: relative; /* To position submenu */
+}
+
+.categories a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.categories .submenu {
+    display: none; /* Hide submenu by default */
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1; /* Ensure submenu is above other elements */
+}
+
+.categories li:hover .submenu {
+    display: block;
+}
+
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}

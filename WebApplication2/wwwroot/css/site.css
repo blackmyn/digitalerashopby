@@ -1,0 +1,80 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: rgba(198, 193, 234, 255);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+a {
+    color: rgb(37, 150, 190);
+    text-decoration: none;
+    transition: color 0.3s ease; /* Add smooth transition for hover effect */
+}
+
+    a:hover {
+        color: #0056b3;
+    }
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.logo img { /* Assuming you're using an image for the logo */
+    max-height: 50px; /* Adjust as needed */
+}
+
+.search-bar {
+    display: flex;
+}
+
+/* Category Navigation Styles */
+.category-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.category-nav li {
+    margin: 0 15px; /* Increased spacing for better readability */
+    position: relative;
+}
+
+.category-nav a {
+    text-decoration: none;
+    color: #333;
+    padding: 8px; /* Add padding for better hover area */
+    transition: background-color 0.3s ease;
+}
+
+    .category-nav a:hover {
+        background-color: #e9ecef; /* Subtle background on hover */
+    }
+
+.category-nav li ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 150px; /* Set a minimum width for sub-menus */
+    background-color: #f8f9fa; /* Lighter background for sub-menus */
+    z-index: 1; /* Ensure sub-menu appears on top of other elements */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+    .category-nav li ul a {
+        display: block;
+        padding: 8px 15px;
+        color: #333;
+    }
+
+.category-nav li:hover ul {
+    display: block;
+}

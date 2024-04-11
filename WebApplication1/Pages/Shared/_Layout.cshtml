@@ -1,0 +1,104 @@
+﻿    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Digital Shop - First choice in Belarus</title>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    </head>
+    <body>
+        <header>
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <h1>Digital Shop</h1>
+                    </div>
+                    <div class="search-bar">
+                        <input type="text" placeholder="Поиск товаров..." />
+                        <button><i class="material-icons">search</i></button>
+                    </div>
+                    <div class="icons">
+                        <a href="#"><i class="material-icons">shopping_cart</i></a>
+                        <a href="#"><i class="material-icons">account_circle</i></a>
+                    </div>
+                </div>
+                <nav class="categories">
+                    <ul>
+                        <li>
+                            <a href="#">Товары <i class="material-icons">arrow_drop_down</i></a>
+                            <ul class="submenu">
+                                <li><a href="#">Топ Предложения</a></li>
+                                <li><a href="#">Комплектующие</a></li>
+                                <li><a href="#">Компьютеры</a></li>
+                                <li><a href="#">Продукция Apple</a></li>
+                                <li><a href="#">Электроника</a></li>
+                                <li><a href="#">3D Принтеры</a></li>
+                                <li><a href="#">Сеть</a></li>
+                                <li><a href="#">Аксессуары</a></li>
+                                <li><a href="#">Игровые и Программные Продукты</a></li>
+                            </ul>
+                            <a href="#">Топ Предложения<i class="material-icons">arrow_drop_down</i></a>
+                            <ul class="submenu">
+                                <li><a href="#">Распродажа Техники Apple</a></li>
+                                <li><a href="#">Процессоры</a></li>
+                                <li><a href="#">SSD и HDD диски</a></li>
+                                <li><a href="#">Память</a></li>
+                                <li><a href="#">Ноутбуки</a></li>
+                                <li><a href="#">Игровые Ноутбуки</a></li>
+                                <li><a href="#">Мониторы</a></li>
+                                <li><a href="#">Аксессуары</a></li>
+                                <li><a href="#">Игровые и Программные Продукты</a></li>
+                            </ul>
+                            <a href="#">Комплектующие<i class="material-icons">arrow_drop_down</i></a>
+                            <ul class="submenu">
+                                <li><a href="#">AMD Сборка</a></li>
+                                <li><a href="#">Intel Сборка</a></li>
+                                <li><a href="#">Процессоры/CPU </a></li>
+                                <li><a href="#">Видеокарты</a></li>
+                                <li><a href="#">Материнские платы</a></li>
+                                <li><a href="#">Диски и Память</a></li>
+                                <li><a href="#">Корпусы</a></li>
+                                <li><a href="#">Блоки Питания</a></li>
+                                <li><a href="#">Продукты Охлаждения</a></li>
+                            </ul>
+                            <a href="#">Компьютеры<i class="material-icons">arrow_drop_down</i></a>
+                            <ul class="submenu">
+                                <li><a href="#">Персональные компьютеры</a></li>
+                                <li><a href="#">Ноутбуки</a></li>
+                                <li><a href="#">Рабочие станции</a></li>
+                                <li><a href="#">Сервера</a></li>
+                                <li><a href="#">Мониторы</a></li>
+                            </ul>
+                            <a href="#">Apple<i class="material-icons">arrow_drop_down</i></a>
+                            <ul class="submenu">
+                                <li><a href="#">MacBook</a></li>
+                                <li><a href="#">Mac Desktops</a></li>
+                                <li><a href="#">iPad</a></li>
+                                <li><a href="#">Apple Watch</a></li>
+                                <li><a href="#">AirPods</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+
+        <footer class="border-top footer text-muted">
+        
+        </footer>
+
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+
+        @await RenderSectionAsync("Scripts", required: false)
+    </body>
+    </html>
