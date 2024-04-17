@@ -1,120 +1,173 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<main class="container mx-auto py-8 flex">
-    <div class="w-1/4 mr-4">
-        <div class="bg-white p-4 rounded shadow">
-            <h2 class="text-lg font-semibold mb-4">Информация о магазине</h2>
-            <p>Магазин комплектующих "PCParts" предлагает широкий ассортимент комплектующих для персональных компьютеров. Мы специализируемся на продаже процессоров, видеокарт, материнских плат, оперативной памяти, жестких дисков и других компонентов высокого качества от ведущих производителей.</p>
-            <p>У нас вы найдете всё необходимое для сборки или модернизации вашего ПК. Наши цены доступны, а качество товаров подтверждено долгосрочным опытом и положительными отзывами наших клиентов.</p>
+<div class="md:col-span-3 p-4">
+    <div>
+        <img src="/770X443.jpg" alt="Большая картинка" />
+    </div>
+    <h2 class="text-lg pt-4">МОНИТОРЫ BENQ</h2>
+    <div class="md:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden product-card">
+            <img src="/BenQ-MOBIUZ-EX2510S-HDR10-FreeSync-165-Hz-IPS-Gaming-Monitor-300x300.jpg" alt="Продукт" class="w-full h-54 object-cover">
+            <div class="p-4">
+                <h2 class="text-xl font-bold text-gray-800">BenQ WQ23OP3 27″ 16:9 4K IPS Monitor</h2>
+                <p class="mt-2 text-gray-600">27″ 16:9 4K IPS Monitor</p>
+                <div class="mt-4 flex justify-between items-center">
+                    <span class="font-bold text-gray-800">Цена: $169.99</span>
+                    <button class="px-4 py-2 text-white rounded">Купить</button>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden product-card">
+            <img src="/BenQ-PD2705Q-DesignVue-Designer-HDR-IPS-Monitor-300x300.jpg" alt="Продукт" class="w-full h-54 object-cover">
+            <div class="p-4">
+                <h2 class="text-xl font-bold text-gray-800">BenQ PD2705Q DesignVue Designer 27″ 16:9 HDR IPS Monitor</h2>
+                <p class="mt-2 text-gray-600">27″ 16:9 4K IPS Monitor</p>
+                <div class="mt-4 flex justify-between items-center">
+                    <span class="font-bold text-gray-800">Цена: $109.99</span>
+                    <button class="px-4 py-2 text-white rounded">Купить</button>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden product-card">
+            <img src="/BenQ-Zowie-XL2566K-25-Inch-E-Sports-Gaming-Monitor-300x300.jpg" alt="Продукт" class="w-full h-54 object-cover">
+            <div class="p-4">
+                <h2 class="text-xl font-bold text-gray-800">BenQ Zowie XL2566K 25 Inch E-Sports Gaming Monitor</h2>
+                <p class="mt-2 text-gray-600">25 Inch E-Sports Gaming Monitor</p>
+                <div class="mt-4 flex justify-between items-center">
+                    <span class="font-bold text-gray-800">Цена: $259.99</span>
+                    <button class="px-4 py-2 text-white rounded">Купить</button>
+                </div>
+            </div>
         </div>
     </div>
-
-    <div class="w-3/4">
-
-        <div class="bg-gray-200 p-4 rounded shadow mb-4">
-            <img src="~/webp_Intel_14th_GenCategoryBanner.jpg" alt="Изображение 1" class="">
+    <div>
+        <div class="md:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <img src="/Intel-Processor.jpg" alt="Alternate Text" />
+            </div>
+            <div>
+                <img src="/AMD-Processor.jpg" alt="Alternate Text" />
+            </div>
         </div>
-
+    </div>
+    <h2 class="text-lg pt-4">ПИТАНИЕ ОТ COOLER MASTER</h2>
+    <div class="md:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden product-card">
+            <img src="/cooler1.jpg" alt="Продукт" class="w-full h-54 object-cover">
+            <div class="p-4">
+                <h2 class="text-xl font-bold text-gray-800">Cooler Master MWE 750 V2 80 Plus Bronze SMPS MPE-7501-ACABW-BIN MPE-7501-ACABW-BI</h2>
+                <p class="mt-2 text-gray-600">80 Plus Bronze SMPS MPE-7501-ACABW-BIN MPE-7501-ACABW-BI</p>
+                <div class="mt-4 flex justify-between items-center">
+                    <span class="font-bold text-gray-800">Цена: $69.99</span>
+                    <button class="px-4 py-2 text-white rounded">Купить</button>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden product-card">
+            <img src="/cooler2.jpg" alt="Продукт" class="w-full h-54 object-cover">
+            <div class="p-4">
+                <h2 class="text-xl font-bold text-gray-800">Cooler Master MWE Gold 750 V2 Full Modular SMPS MPE-7501-AFAAG-IN</h2>
+                <p class="mt-2 text-gray-600">750 V2 Full Modular SMPS MPE-7501-AFAAG-IN</p>
+                <div class="mt-4 flex justify-between items-center">
+                    <span class="font-bold text-gray-800">Цена: $79.99</span>
+                    <button class="px-4 py-2 text-white rounded">Купить</button>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden product-card">
+            <img src="/cooler3.jpg" alt="Продукт" class="w-full h-54 object-cover">
+            <div class="p-4">
+                <h2 class="text-xl font-bold text-gray-800">Cooler Master MWE 850 Watt 80 Plus V2 Gold Fully Modular Power Supply MPE-8501-AFAAG-IN</h2>
+                <p class="mt-2 text-gray-600">Watt 80 Plus V2 Gold Fully Modular Power Supply MPE-8501-AFAAG-IN</p>
+                <div class="mt-4 flex justify-between items-center">
+                    <span class="font-bold text-gray-800">Цена: $59.99</span>
+                    <button class="px-4 py-2 text-white rounded">Купить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="md:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <img src="/Logitech-Products.jpg" alt="Alternate Text" />
+            </div>
+            <div>
+                <img src="/Razer-Products.jpg" alt="Alternate Text" />
+            </div>
+        </div>
+    </div>
+    <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="border-2 border-pink-900 rounded-lg p-4">
+            <h2 class="text-xl font-bold text-black mb-4">ГОРЯЧЕЕ ПРЕДЛОЖЕНИЕ</h2>
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden product-card">
+                <img src="/cooler1.jpg" alt="Продукт" class="w-full h-54 object-cover">
+                <div class="p-4">
+                    <h2 class="text-xl font-bold text-gray-800">Cooler Master MWE 750 V2 80 Plus Bronze SMPS MPE-7501-ACABW-BIN MPE-7501-ACABW-BI</h2>
+                    <p class="mt-2 text-gray-600">80 Plus Bronze SMPS MPE-7501-ACABW-BIN MPE-7501-ACABW-BI</p>
+                    <div class="mt-4 flex justify-between items-center">
+                        <span class="font-bold text-gray-800">Цена: $69.99</span>
+                        <button class="px-4 py-2 text-white rounded">Купить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="grid grid-cols-2 gap-4">
-            <div class="bg-red-200 p-4 rounded shadow"><img src="~/images_CategoryPages_CategoryPromos_PCParts_2022_November_ASUSOPBG_Z790_cat_box_200x200.png" alt="Изображение 2" class=""></div>
-            <div class="bg-red-200 p-4 rounded shadow"><img src="~/images_CategoryPages_CategoryPromos_PCParts_2022_November_ASUS_ROG_AMD_B550_cat_box_200x200.png" alt="Изображение 3" class=""></div>
-        </div>
-
-        <div class="grid grid-cols-4 gap-3"> <!--эти блоки 3 строки 4 столбца ст-->"
-            <h2 class="text-lg font-semibold mb-4">Комплектующие для PC</h2>
-            <div class="bg-red-200 p-4 rounded shadow">
-                <img src="~/652624_436188_01_front_thumbnail.jpg">Процессоры INTEL</img>
-            </div>
-            <div class="bg-red-200 p-4 rounded shadow">
-                <img src="~/652682_436535_01_front_thumbnail.jpg">Процессоры AMD</img>
-            </div>
-            <div class="bg-red-200 p-4 rounded shadow">
-                <img src="~/636419_264374_01_front_thumbnail.jpg">Видеокарты NVIDIA</img>
-            </div>
-            <div class="bg-red-200 p-4 rounded shadow">
-                <img src="~/652682_436535_01_front_thumbnail.jpg">Видеокарты AMD</img>
-            </div>
-            <div class="bg-red-200 p-4 rounded shadow">
-                <img src="~/643431_336560_01_front_thumbnail.jpg">Материнские платы INTEL</img>
-            </div>
-            <div class="bg-red-200 p-4 rounded shadow">
-                <img src="~/642838_332106_01_front_thumbnail.jpg">Материнские платы AMD</img>
-            </div>
-            <div class="bg-red-200 p-4 rounded shadow">
-                <img src="~/467049_098715_01_front_thumbnail.jpg">Оперативная память DDR4</img>
-            </div>
-            <div class="bg-red-200 p-4 rounded shadow">
-                <img src="~/646534_371898_01_front_thumbnail.jpg">Оперативная память RAM</img>
-            </div>
-            <div class="bg-red-200 p-4 rounded shadow">
-                <img src="~/601600_874099_01_front_thumbnail.jpg">SSD диски</img>
-            </div>
-            <div class="bg-red-200 p-4 rounded shadow">
-                <img src="~/622634_103275_01_front_thumbnail.jpg">HDD диски</img>
-            </div>
-            <div class="bg-red-200 p-4 rounded shadow">
-                <img src="~/642886_329698_01_front_thumbnail.jpg">Компьютерные корпусы</img>
-            </div>
-            <div class="bg-red-200 p-4 rounded shadow">
-                <img src="~/642027_326157_01_front_thumbnail.jpg">Питание</img>
-            </div>
-        </div>
-        <div>
-           <img src="~/images_CategoryPages_CategoryPromos_Motherboards_0208_Intel13thGen_CategoryBanner.jpg"/>
-        </div>
-
-        <div> <!--4 столбца 2 строки-->
-            <h2 class="text-lg font-semibold mb-4">Товары по брендам</h2>
             <div>
-                <img src="~/intel.png"/>Intel
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden product-card">
+                    <img src="/cooler1.jpg" alt="Продукт" class="w-full h-54 object-cover">
+                    <div class="p-4">
+                        <h2 class="text-xl font-bold text-gray-800">Cooler Master MWE 750 V2 80 Plus Bronze SMPS MPE-7501-ACABW-BIN MPE-7501-ACABW-BI</h2>
+                        <p class="mt-2 text-gray-600">80 Plus Bronze SMPS MPE-7501-ACABW-BIN MPE-7501-ACABW-BI</p>
+                        <div class="mt-4 flex justify-between items-center">
+                            <span class="font-bold text-gray-800">Цена: $69.99</span>
+                            <button class="px-4 py-2 text-white rounded">Купить</button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div>
-                <img src="~/amd.png" />AMD
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden product-card">
+                    <img src="/cooler1.jpg" alt="Продукт" class="w-full h-54 object-cover">
+                    <div class="p-4">
+                        <h2 class="text-xl font-bold text-gray-800">Cooler Master MWE 750 V2 80 Plus Bronze SMPS MPE-7501-ACABW-BIN MPE-7501-ACABW-BI</h2>
+                        <p class="mt-2 text-gray-600">80 Plus Bronze SMPS MPE-7501-ACABW-BIN MPE-7501-ACABW-BI</p>
+                        <div class="mt-4 flex justify-between items-center">
+                            <span class="font-bold text-gray-800">Цена: $69.99</span>
+                            <button class="px-4 py-2 text-white rounded">Купить</button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div>
-                <img src="~/nvidia.png" />NVIDIA
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden product-card">
+                    <img src="/cooler1.jpg" alt="Продукт" class="w-full h-54 object-cover">
+                    <div class="p-4">
+                        <h2 class="text-xl font-bold text-gray-800">Cooler Master MWE 750 V2 80 Plus Bronze SMPS MPE-7501-ACABW-BIN MPE-7501-ACABW-BI</h2>
+                        <p class="mt-2 text-gray-600">80 Plus Bronze SMPS MPE-7501-ACABW-BIN MPE-7501-ACABW-BI</p>
+                        <div class="mt-4 flex justify-between items-center">
+                            <span class="font-bold text-gray-800">Цена: $69.99</span>
+                            <button class="px-4 py-2 text-white rounded">Купить</button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div>
-                <img src="~/asus.png" />ASUS
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden product-card">
+                    <img src="/cooler1.jpg" alt="Продукт" class="w-full h-54 object-cover">
+                    <div class="p-4">
+                        <h2 class="text-xl font-bold text-gray-800">Cooler Master MWE 750 V2 80 Plus Bronze SMPS MPE-7501-ACABW-BIN MPE-7501-ACABW-BI</h2>
+                        <p class="mt-2 text-gray-600">80 Plus Bronze SMPS MPE-7501-ACABW-BIN MPE-7501-ACABW-BI</p>
+                        <div class="mt-4 flex justify-between items-center">
+                            <span class="font-bold text-gray-800">Цена: $69.99</span>
+                            <button class="px-4 py-2 text-white rounded">Купить</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div>
-                <img src="~/msi.png" />MSI
-            </div>
-            <div>
-                <img src="~/gigabyte.png" />Gigabyte
-            </div>
-            <div>
-                <img src="~/evga.png" />EVGA
-            </div>
-            <div>
-                <img src="~/asrock.png" />ASRock
-            </div>
-        </div>
-
-        <div> <!--все в строку-->
-            <h2 class="text-lg font-semibold mb-4">Компьютерная периферия</h2>
-            <div>
-                <img src="~/monitors.jpg"/>Мониторы
-            </div>
-            <div>
-                <img src="~/keyboard.jpg" />Клавиатуры
-            </div>
-            <div>
-                <img src="~/mouse.jpg" />Мыши
-            </div>
-            <div>
-                <img src="~/headset.jpg" />Наушники
-            </div>
-        </div>
-
-        <div>
-            <img src="~/images_CategoryPages_CategoryPromos_PCParts_2022_May_CategoryParts_ASUSRTX30H.jpg"/>
-        </div>
-
-        <div>
-            <!--здесь форма для входа -->
         </div>
     </div>
-</main>
+
+</div>

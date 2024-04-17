@@ -4,114 +4,256 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PixelPlanet - Первый выбор в Беларуси</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-DPOUjDGMpVZaRv54SU0Zf5tSnHjvDs/DpjkNE4dhdWC3yfk56/8EB0IC+tdYLizn3Wg0vEEnKofkLkTSd3W5iQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-SGfZP4TRgABFsTWDZp3uMlNmxV0D5Q27T6kzvl6ss2WtHKzDrbHLrPr7CyaXq13b" crossorigin="anonymous">
     <style>
+        * {
+            font-family: Tilda Sans;
+        }
+
+        body {
+            background-color: #edf2f7;
+        }
+
+        /* Дополнительные стили для улучшения дизайна */
+        .product-card {
+            transition: transform 0.3s ease-in-out;
+        }
+
+            .product-card:hover {
+                transform: scale(1.05);
+            }
+
+        .footer-link:hover {
+            color: #4A5568;
+        }
+
+        .category-item {
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+
+            .category-item:hover {
+                background-color: #e2e8f0;
+            }
+
+        .search-input {
+            border-radius: 0.25rem;
+            border: 1px solid white;
+            padding: 0.5rem 1rem;
+            width: calc(100% - 3.5rem);
+            transition: border-color fadeIn 0.3s ease forwards;
+        }
+
+            .search-input:focus {
+                outline: none;
+                border-color: #08112e;
+            }
+
+        .search-button {
+            width: 5.5rem;
+            margin-left: 1rem;
+        }
+        .subcategories {
+            display: none;
+        }
+        .category-item:hover .subcategories {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            animation: fadeIn 0.3s ease forwards;
+        }
+
+        .container-login {
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 0.5rem;
+            font-size: 1rem;
+            border-radius: 0.25rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        button {
+            background-color: #2d3748;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            border-radius: 0.25rem;
+            border: none;
+            cursor: pointer;
+        }
+
+            button:hover {
+                background-color: #1a202c;
+            }
+
+        #message {
+            margin-top: 1rem;
+        }
     </style>
 </head>
-<body class="bg-gray-100">
-
-    <header class="bg-white shadow">
-        <div class="container mx-auto py-4 flex justify-between items-center">
-            <div class="flex-shrink-0">
+<body>
+    <nav class="bg-white shadow">
+        <div class="container mx-auto py-4 pl-4 flex justify-between items-center">
+            <div>
                 <img src="~/pixelplanet-high-resolution-logo.png" alt="Альтернативный текст" class="h-12" />
             </div>
-            <div class="flex-grow mx-4">
-                <div class="relative">
-                    <input type="text" placeholder="Найти что-то..." class="w-full py-2 pl-10 pr-4 border border-blue-900 rounded-md focus:outline-none focus:border-purple-900 transition duration-150 ease-in-out">
-                    <div class="absolute inset-y-0 left-0 flex items-center pl-3">
-                        <i class="material-icons text-gray-500">search</i>
-                    </div>
+            <div class="flex-grow ml-10 mr-4">
+                <div class="relative flex">
+                    <input type="text" placeholder="Найти что-то..." class="border-solid border-gray-800 py-2 pl-4 rounded-l-md focus:outline-none focus:border-purple-900 transition duration-150 ease-in-out search-input">
+                    <button class="px-4 py-2 text-white rounded focus:outline-none search-button">Поиск</button>
                 </div>
             </div>
             <div class="flex items-center space-x-4">
-                <a href="#" class="text-gray-700 hover:text-purple-900"><i class="material-icons">shopping_cart</i></a>
-                <a href="#" class="text-gray-700 hover:text-purple-900"><i class="material-icons">account_circle</i></a>
+                <a href="#" class="text-gray-800 hover:text-gray-600"><i class="material-icons">shopping_cart</i></a>
+                <a href="Account/Login" class="text-gray-800 hover:text-gray-600"><i class="material-icons">account_circle</i></a>
             </div>
         </div>
-    </header>
-
-    <div class="bg-gray-800 text-white">
-        <div class="container mx-auto py-2">
-            <ul class="flex justify-center space-x-8">
-                <li class="relative">
-                    <a href="#" class="hover:text-gray-300">Топовые Предложения</a>
-                    <ul class="absolute top-full left-0 hidden group-hover:block bg-gray-900 py-2 rounded-md shadow-lg">
-                        <li><a href="#" class="block px-4 py-2 hover:text-gray-300">Распродажа техники Apple</a></li>
-                        <li><a href="#" class="block px-4 py-2 hover:text-gray-300">Процессоры</a></li>
-                        <li><a href="#" class="block px-4 py-2 hover:text-gray-300">Материнские платы</a></li>
-                        <li><a href="#" class="block px-4 py-2 hover:text-gray-300">Видеокарты</a></li>
-                        <li><a href="#" class="block px-4 py-2 hover:text-gray-300">Оперативная память</a></li>
-                        <li><a href="#" class="block px-4 py-2 hover:text-gray-300">Жесткие диски</a></li>
-                    </ul>
-                </li>
-                <li class="relative group">
-                    <a href="#" class="hover:text-gray-300">Комплектующие</a>
-                    <ul class="absolute top-full left-0 hidden group-hover:block bg-gray-900 py-2 rounded-md shadow-lg">
-                        <li><a href="#" class="block px-4 py-2 hover:text-gray-300">AMD сборки</a></li>
-                        <li><a href="#" class="block px-4 py-2 hover:text-gray-300">Intel сборки</a></li>
-                        <li><a href="#" class="block px-4 py-2 hover:text-gray-300">Процессоры</a></li>
-                        <li><a href="#" class="block px-4 py-2 hover:text-gray-300">Материнские платы</a></li>
-                        <li><a href="#" class="block px-4 py-2 hover:text-gray-300">Видеокарты</a></li>
-                        <li><a href="#" class="block px-4 py-2 hover:text-gray-300">Оперативная память</a></li>
-                        <li><a href="#" class="block px-4 py-2 hover:text-gray-300">Жесткие диски</a></li>
-                        <li><a href="#" class="block px-4 py-2 hover:text-gray-300">Блоки питания</a></li>
-                        <li><a href="#" class="block px-4 py-2 hover:text-gray-300">Корпуса</a></li>
-                        <li><a href="#" class="block px-4 py-2 hover:text-gray-300">Охлаждение</a></li>
-                        <li><a href="#" class="block px-4 py-2 hover:text-gray-300">Сетевые устройства</a></li>
-                    </ul>
-                </li>
-                <li class="relative group">
-                    <a href="#" class="hover:text-gray-300">Компьютеры</a>
-                    <ul class="absolute top-full left-0 hidden group-hover:block bg-gray-900 py-2 rounded-md shadow-lg">
-                        <li><a href="#" class="block px-4 py-2 hover:text-gray-300">Персональные компьютеры</a></li>
-                        <li><a href="#" class="block px-4 py-2 hover:text-gray-300">Ноутбуки</a></li>
-                        <li><a href="#" class="block px-4 py-2 hover:text-gray-300">Моноблоки</a></li>
-                        <li><a href="#" class="block px-4 py-2 hover:text-gray-300">Рабочие станции</a></li>
-                        <li><a href="#" class="block px-4 py-2 hover:text-gray-300">Сервера</a></li>
-                    </ul>
-                </li>
-                <li class="relative group">
-                    <a href="#" class="hover:text-gray-300">Техника Apple</a>
-                    <ul class="absolute top-full left-0 hidden group-hover:block bg-gray-900 py-2 rounded-md shadow-lg">
-                        <li><a href="#" class="block px-4 py-2 hover:text-gray-300">MacBook</a></li>
-                        <li><a href="#" class="block px-4 py-2 hover:text-gray-300">iPad</a></li>
-                        <li><a href="#" class="block px-4 py-2 hover:text-gray-300">iPhone</a></li>
-                        <li><a href="#" class="block px-4 py-2 hover:text-gray-300">AirPods</a></li>
-                        <li><a href="#" class="block px-4 py-2 hover:text-gray-300">Apple Watch</a></li>
-                    </ul>
-                </li>
-            </ul>
+    </nav>
+    <div class="container mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-4">
+            <div class="md:col-span-1">
+                <div class="bg-gray-800 text-white py-2 rounded text-center">
+                    <h2 class="text-lg">ПОКУПКИ ПО КАТЕГОРИЯМ ТОВАРОВ</h2>
+                </div>
+            </div>
+            <div class="md:col-span-3 bg-white-800 text-black py-2 pl-4 rounded">
+                <ul class="flex space-x-12">
+                    <li class="relative">
+                        <a href="#" class="text-lg footer-link">ТОПОВЫЕ ПРЕДЛОЖЕНИЯ!</a>
+                        <ul class="absolute top-full left-0 hidden group-hover:block bg-white py-2 rounded-md shadow-lg">
+                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">РАСПРОДАЖА APPLE</a></li>
+                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">ПРОЦЕССОРЫ</a></li>
+                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">МАТЕРИНСКИЕ ПЛАТЫ</a></li>
+                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">ВИДЕОКАРТЫ</a></li>
+                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">ОПЕРАТИВНАЯ ПАМЯТЬ</a></li>
+                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">ЖЕСТКИЕ ДИСКИ</a></li>
+                        </ul>
+                    </li>
+                    <li class="relative group">
+                        <a href="#" class="text-lg footer-link">КОМПЛЕКТУЮЩИЕ</a>
+                        <ul class="absolute top-full left-0 hidden group-hover:block bg-white py-2 rounded-md shadow-lg">
+                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">AMD СБОРКИ</a></li>
+                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">INTEL СБОРКИ</a></li>
+                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">ПРОЦЕССОРЫ</a></li>
+                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">МАТЕРИНСКИЕ ПЛАТЫ</a></li>
+                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">ВИДЕОКАРТЫ</a></li>
+                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">ОПЕРАТИВНАЯ ПАМЯТЬ</a></li>
+                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">ЖЕСТКИЕ ДИСКИ</a></li>
+                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">БЛОКИ ПИТАНИЯ</a></li>
+                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">КОРПУСА</a></li>
+                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">ОХЛАЖДЕНИЕ</a></li>
+                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">СЕТЕВЫЕ УСТРОЙСТВА</a></li>
+                        </ul>
+                    </li>
+                    <li class="relative group">
+                        <a href="#" class="text-lg footer-link">КОМПЬТЕРЫ И НОУТБУКИ</a>
+                        <ul class="absolute top-full left-0 hidden group-hover:block bg-white py-2 rounded-md shadow-lg">
+                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">ПЕРСОНАЛЬНЫЕ КОМПЬЮТЕРЫ</a></li>
+                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">НОУТБУКИ</a></li>
+                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">МОНОБЛОКИ</a></li>
+                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">РАБОЧИЕ СТАНЦИИ</a></li>
+                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">СЕРВЕРА</a></li>
+                        </ul>
+                    </li>
+                    <li class="relative group">
+                        <a href="#" class="text-lg footer-link">&nbsp;ТЕХНИКА APPLE</a>
+                        <ul class="absolute top-full left-0 hidden group-hover:block bg-white py-2 rounded-md shadow-lg">
+                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">MACBOOK</a></li>
+                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">IPAD</a></li>
+                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">IPHONE</a></li>
+                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">AIRPODS</a></li>
+                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">APPLE WATCH</a></li>
+                        </ul>
+                    </li>
+                    <li class="relative group">
+                        <a href="#" class="text-lg footer-link">&nbsp;&nbsp;ПЕРИФЕРИЯ</a>
+                        <ul class="absolute top-full left-0 hidden group-hover:block bg-white py-2 rounded-md shadow-lg">
+                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">МЫШИ</a></li>
+                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">КЛАВИАТУРЫ</a></li>
+                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">НАУШНИКИ</a></li>
+                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">АКССЕСУАРЫ</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="md:col-span-1 bg-white-800 text-black py-2 pl-4 rounded">
+                <ul class="py-2 space-y-2">
+                    <li><a href="#" class="text-lg hover:text-indigo-600">ПРОЦЕССОРЫ</a></li>
+                    <li><a href="#" class="text-lg hover:text-indigo-600">МАТЕРИНСКИЕ ПЛАТЫ</a></li>
+                    <li><a href="#" class="text-lg hover:text-indigo-600">ВИДЕОКАРТЫ</a></li>
+                    <li><a href="#" class="text-lg hover:text-indigo-600">ПАМЯТЬ</a></li>
+                    <li><a href="#" class="text-lg hover:text-indigo-600">HDD ДИСКИ</a></li>
+                    <li><a href="#" class="text-lg hover:text-indigo-600">SDD ДИСКИ</a></li>
+                    <li><a href="#" class="text-lg hover:text-indigo-600">МОНИТОРЫ</a></li>
+                    <li><a href="#" class="text-lg hover:text-indigo-600">ПИТАНИЕ</a></li>
+                    <li><a href="#" class="text-lg hover:text-indigo-600">АКССЕСУАРЫ</a></li>
+                </ul>
+            </div>
+            @RenderBody()
+        </div>
+        <div class="bg-white-800 text-black py-2 pl-4 rounded">
+            <div class="flex items-center space-x-52 w-full">
+                <div class="flex items-center">
+                    <i class="material-icons text-2xl text-gray-600">security</i>
+                    <p class="text-lg pl-2">Высокое качество товаров</p>
+                </div>
+                <div class="flex items-center">
+                    <i class="material-icons text-2xl text-gray-600">access_time</i>
+                    <p class="text-lg pl-2">Быстрая доставка</p>
+                </div>
+                <div class="flex items-center">
+                    <i class="material-icons text-2xl text-gray-600">monetization_on</i>
+                    <p class="text-lg pl-2">Привлекательные цены</p>
+                </div>
+                <div class="flex items-center">
+                    <i class="material-icons text-2xl text-gray-600">thumbs_up_down</i>
+                    <p class="text-lg pl-2">Гарантия удовлетворения</p>
+                </div>
+            </div>
         </div>
     </div>
 
-    <main class="container mx-auto py-8 flex">
-      @RenderBody()
-    </main>
-
+    <!-- Подвал -->
     <footer class="bg-gray-800 text-white py-8">
         <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div class="flex flex-col space-y-4">
-                <h3 class="text-lg font-semibold">Подпишитесь на предложения</h3>
+                <h3 class="text-lg">Подпишитесь на предложения</h3>
                 <p class="text-sm">Подписавшись на рассылку, вы получите доступ к нашим лучшим предложениям, эксклюзивным сделкам и многое другое. Ничего лишнего отправлено не будет, так что не бойтес</p>
-                <button class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">ПОДПИСАТЬСЯ</button>
+                <button class="text-white py-2 px-4 rounded-md">ПОДПИСАТЬСЯ</button>
             </div>
 
             <div class="flex flex-col space-y-4">
-                <h3 class="text-lg font-semibold">Гарантированное удовлетворение</h3>
+                <h3 class="text-lg">Гарантированное удовлетворение</h3>
                 <p class="text-sm">Мы гарантируем ваше удовлетворение от каждого продукта, который мы продаем, с полным возвратом согласно нашей политике возврата – без чека, если у вас есть учетная запись PixelPlanet.</p>
-                <button class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">ПОДДЕРЖКА И РЕМОНТ</button>
+                <button class="text-white py-2 px-4 rounded-md">ПОДДЕРЖКА И РЕМОНТ</button>
             </div>
 
             <div class="flex flex-col space-y-4">
-                <h3 class="text-lg font-semibold">Мы нанимаем</h3>
-                <p class="text-sm">Работайте с последними достижениями в компьютерных и цифровых технологиях. Ищите последние вакансии на сайте доступа к работе PixelPlanet </p>
-                <button class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">СМОТРЕТЬ ВАКАНСИИ</button>
+                <h3 class="text-lg">Мы нанимаем</h3>
+                <p class="text-sm">Работайте с последними достижениями в компьютерных и цифровых технологиях. компьютерных и цифровых технологиях. Ищите последние вакансии на сайте доступа к работе PixelPlanet </p>
+                <button class="text-white py-2 px-4 rounded-md">СМОТРЕТЬ ВАКАНСИИ</button>
             </div>
 
             <div class="flex flex-col space-y-4">
-                <h3 class="text-lg font-semibold">Свяжитесь с нами</h3>
+                <h3 class="text-lg">Свяжитесь с нами</h3>
                 <p class="text-sm">Не стесняйтесь обращаться к нам по любым вопросам или для получения поддержки. Наша служба поддержки доступна 24/7, чтобы помочь вам.</p>
                 <p class="text-sm">Email: info@pixeplanet.com <br />Телефон: +375(29)304-00-35 <br />Адрес: г. Гомель, пос. Минский, кв-л 32, влад. 17А стр. 1 </p>
             </div>
@@ -134,14 +276,12 @@
         </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js" integrity="sha512-y0aaM7rXzsmBEIyUN3xfNtuzfwqZ8UmlOYY/Jk9N7jj1wzFYn8pQ6adPJV6/JpZ1JHmIzRd86OjT2qG5GVD39w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+    <!-- JavaScript для раскрывающихся категорий -->
     <script>
         $('.relative').hover(function () {
             $(this).find('ul').toggleClass('hidden');
         });
     </script>
-
 </body>
 </html>
