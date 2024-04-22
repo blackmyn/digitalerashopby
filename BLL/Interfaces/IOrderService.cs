@@ -11,5 +11,7 @@ namespace BLL.Interfaces
 {
     public interface IOrderService : IService<OrderDto>
     {
+        public Task<int> PlaceOrderAsync(string userId, IEnumerable<CartDto> cartItems, string paymentMethod, string deliveryMethod);
+
     }
 }

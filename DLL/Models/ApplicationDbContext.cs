@@ -25,6 +25,7 @@ namespace DLL.Models
             optionsBuilder.UseSqlServer("Server=DESKTOP-S0U5D83;Initial Catalog=shopby;Integrated Security=True;Trust Server Certificate=True;");
         }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<ProdSpec> ProdSpecs { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Specification> Specifications { get; set; }
@@ -34,13 +35,25 @@ namespace DLL.Models
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Delivery> Deliveries { get; set; }
         public DbSet<Cart> Carts { get; set; }
-        public DbSet<ApplicationUser> Users { get; set; }
-        public DbSet<IdentityRole> Roles { get; set; }
+       // public DbSet<ApplicationUser> Users { get; set; }
+        //public DbSet<IdentityRole> Roles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<ProdSpec>()
+                .HasKey(ps => new { ps.ProductId, ps.CharacteristicId });
+
+            modelBuilder.Entity<ProdSpec>()
+                .HasOne(ps => ps.Product)
+                .WithMany(p => p.ProdSpec)
+                .HasForeignKey(ps => ps.ProductId);
+
+            modelBuilder.Entity<ProdSpec>()
+                .HasOne(ps => ps.Specification)
+                .WithMany(s => s.ProdSpec)
+                .HasForeignKey(ps => ps.CharacteristicId);
             modelBuilder.Entity<Product>()
                 .HasOne(p => p.Category)
                 .WithMany(c => c.Products)
@@ -50,11 +63,6 @@ namespace DLL.Models
                 .HasOne(p => p.Brand)
                 .WithMany(b => b.Products)
                 .HasForeignKey(p => p.BrandId);
-
-            modelBuilder.Entity<Specification>()
-                .HasOne(s => s.Product)
-                .WithMany(p => p.Specifications)
-                .HasForeignKey(s => s.ProductId);
 
             modelBuilder.Entity<Review>()
                 .HasOne(r => r.Product)

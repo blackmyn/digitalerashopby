@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DLL.Interfaces
 {
-    public interface ISpecificationRepository : IService<Specification>
+    public interface ISpecificationRepository : IRepository<Specification>
     {
     }
 }

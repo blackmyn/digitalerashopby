@@ -50,6 +50,33 @@ namespace BLL.Services
             var order = _mapper.Map<Order>(orderDTO);
             _orderRepository.Update(order);
         }
+        public async Task<int> PlaceOrderAsync(string userId, IEnumerable<CartDto> cartItems, string paymentMethod, string deliveryMethod)
+        {
+            var order = new Order
+            {
+                OrderDate = DateTime.Now,
+                Status = "Done",
+                TotalPrice = CalculateTotalPrice(cartItems, deliveryMethod),
+                UserId = userId,
+            };
+
+            _orderRepository.Add(order);
+
+            return order.Id;
+        }
+        private decimal CalculateTotalPrice(IEnumerable<CartDto> cartItems, string deliveryMethod)
+        {
+            // Рассчитываем общую стоимость товаров
+            decimal totalProductsPrice = 0;
+            foreach (var item in cartItems)
+            {
+                totalProductsPrice += item.Quantity * item.Product.Price;
+            }
+
+            // Добавляем стоимость доставки, если это не самовывоз
+            decimal deliveryFee = deliveryMethod == "pickup" ? 0 : 1000; // Здесь можно настроить стоимость доставки
+            return totalProductsPrice + deliveryFee;
+        }
     }
-    
+
 }

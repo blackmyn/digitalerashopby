@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DLL.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,14 +14,13 @@ namespace BLL.DTOModels
         public string Description { get; set; }
         public decimal Price { get; set; }
         public string ImageUrl { get; set; }
-
-        public int? CategoryId { get; set; }
-        public CategoryDto Category { get; set; }
-        public int? BrandId { get; set; }
-        public BrandDto Brand { get; set; }
-        public ICollection<SpecificationDto> Specifications { get; set; }
-        public ICollection<ReviewDto> Reviews { get; set; }
-        public ICollection<OrderItemDto> OrderItems { get; set; }
+        public int CategoryId { get; set; }
+        public virtual Category Category { get; set; }
+        public int BrandId { get; set; }
+        public virtual Brand Brand { get; set; }
+        public virtual ICollection<ProdSpec> ProdSpec { get; set; }
+        public virtual ICollection<Review> Reviews { get; set; }
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
     }
 
 }

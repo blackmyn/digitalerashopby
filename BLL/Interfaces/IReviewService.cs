@@ -11,5 +11,6 @@ namespace BLL.Interfaces
 {
     public interface IReviewService : IService<ReviewDto>
     {
+        public IEnumerable<ReviewDto> GetByProductId(int productId);
     }
 }

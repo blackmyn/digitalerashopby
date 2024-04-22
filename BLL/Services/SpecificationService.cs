@@ -3,11 +3,8 @@ using BLL.DTOModels;
 using BLL.Interfaces;
 using DLL.Interfaces;
 using DLL.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BLL.Services
 {
@@ -50,6 +47,10 @@ namespace BLL.Services
             var specification = _mapper.Map<Specification>(specificationDTO);
             _specificationRepository.Update(specification);
         }
+        public IEnumerable<SpecificationDto> GetByProductId(int productId)
+        {
+            var specifications = _specificationRepository.GetAll().Where(s => s.ProductId == productId);
+            return _mapper.Map<IEnumerable<SpecificationDto>>(specifications);
+        }
     }
-
 }

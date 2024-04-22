@@ -283,6 +283,28 @@ namespace DLL.Migrations
                     b.ToTable("Payments");
                 });
 
+            modelBuilder.Entity("DLL.Models.ProdSpec", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CharacteristicId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ProductId", "CharacteristicId");
+
+                    b.HasIndex("CharacteristicId");
+
+                    b.ToTable("ProdSpecs");
+                });
+
             modelBuilder.Entity("DLL.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -372,8 +394,6 @@ namespace DLL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
 
                     b.ToTable("Specifications");
                 });
@@ -586,6 +606,25 @@ namespace DLL.Migrations
                     b.Navigation("Order");
                 });
 
+            modelBuilder.Entity("DLL.Models.ProdSpec", b =>
+                {
+                    b.HasOne("DLL.Models.Specification", "Specification")
+                        .WithMany("ProdSpec")
+                        .HasForeignKey("CharacteristicId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DLL.Models.Product", "Product")
+                        .WithMany("ProdSpec")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Specification");
+                });
+
             modelBuilder.Entity("DLL.Models.Product", b =>
                 {
                     b.HasOne("DLL.Models.Brand", "Brand")
@@ -618,17 +657,6 @@ namespace DLL.Migrations
                     b.Navigation("Product");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("DLL.Models.Specification", b =>
-                {
-                    b.HasOne("DLL.Models.Product", "Product")
-                        .WithMany("Specifications")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -714,9 +742,14 @@ namespace DLL.Migrations
                 {
                     b.Navigation("OrderItems");
 
-                    b.Navigation("Reviews");
+                    b.Navigation("ProdSpec");
 
-                    b.Navigation("Specifications");
+                    b.Navigation("Reviews");
+                });
+
+            modelBuilder.Entity("DLL.Models.Specification", b =>
+                {
+                    b.Navigation("ProdSpec");
                 });
 #pragma warning restore 612, 618
         }

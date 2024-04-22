@@ -10,5 +10,5 @@ namespace BLL.Interfaces
 {
     public interface IProductService : IService<ProductDto>
     {
-    }
+        public IEnumerable<ProductDto> GetProductsByCategory(string category);    }
 }

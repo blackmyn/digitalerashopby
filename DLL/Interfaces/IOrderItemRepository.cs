@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DLL.Interfaces
 {
-    public interface IOrderItemRepository : IService<OrderItem>
+    public interface IOrderItemRepository : IRepository<OrderItem>
     {
     }
 }

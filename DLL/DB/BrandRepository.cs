@@ -10,8 +10,6 @@ using DLL.Interfaces;
 
 namespace DLL.DB
 {
-
-
     public class BrandRepository : IBrandRepository
     {
         private readonly ApplicationDbContext _context;
@@ -53,5 +51,4 @@ namespace DLL.DB
             }
         }
     }
-
 }

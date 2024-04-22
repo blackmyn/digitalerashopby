@@ -6,6 +6,7 @@ namespace WebApplication2.ViewModels
     {
         [Required]
         public string UserName { get; set; }
+
         [Required]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }

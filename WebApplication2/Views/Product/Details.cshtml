@@ -1,0 +1,113 @@
+﻿@model BLL.DTOModels.ProductDto
+
+@{
+    ViewData["Title"] = "Детали товара";
+}
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<div class="container mx-auto px-4 md:col-span-3">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+            <img src="@Model.ImageUrl" alt="@Model.Name" class="w-full rounded-lg shadow-md">
+            <div class="border-l-2 pl-4 mt-10">
+                <h2 class="text-lg font-bold mb-4">Характеристики товара</h2>
+                <ul>
+                    @foreach (var specification in ViewData["Specifications"] as List<BLL.DTOModels.SpecificationDto>)
+                    {
+                        <li class="mb-2">
+                            <span class="font-semibold">@specification.Key:</span>
+                            <span>@specification.Value</span>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="flex flex-col mt-20">
+            <div>
+                <h2 class="text-2xl font-bold">@Model.Name</h2>
+                <p class="text-gray-600 mt-2">@Model.Description</p>
+            </div>
+            <div class="mt-4">
+                <p class="text-gray-800 text-2xl font-bold">Цена: $<span id="price">@Model.Price</span></p>
+                <div class="bg-yellow-200 border border-yellow-400 text-yellow-800 px-4 py-2 mt-8 mx-auto max-w-md text-center rounded-md">
+                    Этот товар имеет 2 года гарантии.
+                </div>
+                <div class="flex items-center mt-4">
+                    <div class="flex items-center border border-gray-300 rounded-md px-3">
+                        <label for="quantity" class="mr-2 mt-2">Количество:</label>
+                        <input type="number" id="quantity" name="quantity" value="1" min="1" class="appearance-none bg-transparent border-none text-gray-700 leading-tight focus:outline-none">
+                    </div>
+                    <form id="addToCartForm" method="post" asp-controller="Cart" asp-action="AddToCart">
+                        <input type="hidden" name="productId" value="@Model.Id" />
+                        <input type="hidden" id="quantityHidden" name="quantity" value="1" />
+                        <button type="submit" class="px-6 py-3 bg-blue-500 text-white rounded-md ml-4 hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300">Добавить в корзину</button>
+                    </form>
+                    <button id="buyNowButton" data-toggle="modal" class="px-6 py-3 bg-green-500 text-white rounded-md ml-4 hover:bg-green-600 focus:outline-none focus:bg-green-600 transition duration-300">Купить сейчас</button>
+                </div>
+
+                <script>
+                    document.getElementById('addToCartForm').addEventListener('submit', function (event) {
+                        var quantity = document.getElementById('quantity').value;
+                        document.getElementById('quantityHidden').value = quantity;
+                    });
+                    document.getElementById('quantity').addEventListener('change', function (event) {
+                        var quantity = parseInt(this.value);
+                        var pricePerUnit = parseFloat('@Model.Price');
+                        var totalPrice = quantity * pricePerUnit;
+                        document.getElementById('price').innerText = totalPrice.toFixed(2);
+                    });
+                </script>
+            </div>
+
+
+            <div class="bg-green-500 text-white px-4 py-2 mt-4 rounded-md hidden" id="addToCartNotification">
+                Товар успешно добавлен в корзину!
+            </div>
+
+            <div class="border-l-2 pl-4 mt-56">
+                <h2 class="text-lg font-bold mb-4">Отзывы пользователей</h2>
+                <ul>
+                    @foreach (var review in ViewData["Reviews"] as List<BLL.DTOModels.ReviewDto>)
+                    {
+                        <li class="mb-4">
+                            <div>
+                                <p class="font-semibold">Рейтинг: @review.Rating</p>
+                                <p>Отзыв: @review.Comment</p>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('addToCartForm').addEventListener('submit', function (event) {
+        event.preventDefault(); // Отмена действия по умолчанию (отправка формы)
+
+        var quantity = document.getElementById('quantity').value;
+        document.getElementById('quantityHidden').value = quantity;
+        document.getElementById('addToCartNotification').classList.remove('hidden');
+        // Отправка формы асинхронно с использованием Fetch API
+        fetch(this.action, {
+            method: this.method,
+            body: new FormData(this)
+        })
+            .then(response => response.json())
+            .then(data => {
+                // Проверка успешности добавления товара
+                if (data.success) {
+                    // Отображение блока с уведомлением
+
+                    // Скрытие уведомления через 3 секунды
+                    setTimeout(function () {
+                        document.getElementById('addToCartNotification').classList.add('hidden');
+                    }, 3000);
+                }
+            })
+            .catch(error => console.error('Ошибка:', error));
+    });
+</script>
+

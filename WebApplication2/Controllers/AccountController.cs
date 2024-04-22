@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using DLL.Models;
+using BLL.DTOModels;
+using BLL.Interfaces;
 
 namespace WebApplication2.Controllers
 {
@@ -17,11 +19,13 @@ namespace WebApplication2.Controllers
     {
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IApplicationUserService userService;
 
-        public AccountController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
+        public AccountController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, IApplicationUserService userService)
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
+            this.userService = userService; 
         }
         public ActionResult Register()
         {
@@ -32,12 +36,16 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterVM model)
         {
+
             if (ModelState.IsValid)
             {
                 ApplicationUser user = new()
                 {
                     UserName = model.Email,
                     Email = model.Email,
+                    Address = "",
+                    FirstName = "",
+                    LastName = ""
                 };
                 var result = await userManager.CreateAsync(user, model.Password);
 
@@ -52,7 +60,7 @@ namespace WebApplication2.Controllers
                 {
                     foreach (var error in result.Errors)
                     {
-                        Console.WriteLine($"Error: {error.Code}, Description: {error.Description}");
+                        return BadRequest("Invalid login attempt");
                     }
 
                     foreach (var error in result.Errors)
@@ -61,11 +69,17 @@ namespace WebApplication2.Controllers
                     }
                 }
             }
-
+            else
+            {
+                return BadRequest("Invalid login attempt");
+            }
             return View(model);
         }
-
         public ActionResult Login()
+        {
+            return View();
+        }
+        public ActionResult EditProfile()
         {
             return View();
         }
@@ -89,6 +103,44 @@ namespace WebApplication2.Controllers
                 return BadRequest("Invalid login attempt");
             }
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateProfile(ApplicationUserDto updatedUserData)
+        {
+            if (ModelState.IsValid)
+            {
+                // Получение текущего пользователя
+                var currentUser = await userManager.GetUserAsync(User);
+
+                // Присваивание новых значений пользователя
+                currentUser.FirstName = updatedUserData.FirstName;
+                currentUser.LastName = updatedUserData.LastName;
+                currentUser.Address = updatedUserData.Address;
+
+                // Обновление пользователя в базе данных
+                var result = await userManager.UpdateAsync(currentUser);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("UserProfile", "Home");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                    return View("EditProfile", updatedUserData);
+                }
+            }
+            else
+            {
+                return View("EditProfile", updatedUserData);
+            }
+        }
+
+
         [AllowAnonymous]
         [HttpGet("/Account/Logout")]
         public async Task<ActionResult> LogOut()

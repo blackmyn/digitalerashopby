@@ -27,6 +27,11 @@ namespace DLL.DB
             return _context.Categories.FirstOrDefault(c => c.Id == id);
         }
 
+        public Category GetByName(string name)
+        {
+            return _context.Categories.FirstOrDefault(c => c.Name == name);
+        }
+
         public void Add(Category category)
         {
             _context.Categories.Add(category);
@@ -49,5 +54,4 @@ namespace DLL.DB
             }
         }
     }
-
 }

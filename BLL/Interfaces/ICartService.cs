@@ -10,5 +10,6 @@ namespace BLL.Interfaces
 {
     public interface ICartService : IService<CartDto>
     {
+        IEnumerable<CartDto> GetCartItemsForUser(string userId);
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DLL.Interfaces
 {
-    public interface IService<T>
+    public interface IRepository<T>
     {
         IEnumerable<T> GetAll();
         T GetById(int id);

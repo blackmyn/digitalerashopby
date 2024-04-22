@@ -1,0 +1,117 @@
+﻿@model IEnumerable<BLL.DTOModels.CartDto>
+
+@{
+    ViewData["Title"] = "Оформление заказа";
+}
+<!-- Добавьте в ваш HTML файл -->
+<link href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+<div class="container mx-auto px-4 md:col-span-3">
+    <h1 class="text-2xl font-bold mb-4">Оформление заказа</h1>
+    <!-- Всплывающее уведомление -->
+    <div id="notification" style="display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: rgba(0, 0, 255, 0.8); color: #fff; padding: 10px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); z-index: 1000;">
+        Заказ успешно добавлен!
+    </div>
+    <form id="checkoutForm" method="post" action="@Url.Action("PlaceOrder", "Order")">
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="paymentMethod">Способ оплаты:</label>
+            <select class="border rounded-md px-3 py-2 w-full" id="paymentMethod" name="paymentMethod">
+                <option value="cash">Наличные</option>
+                <option value="card">Карта</option>
+            </select>
+        </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="deliveryMethod">Способ доставки:</label>
+            <select class="border rounded-md px-3 py-2 w-full" id="deliveryMethod" name="deliveryMethod">
+                <option value="courier" data-delivery-fee="1000">Доставка курьером (+1000 руб.)</option>
+                <option value="pickup" data-delivery-fee="0">Самовывоз</option>
+            </select>
+        </div>
+
+        <h2 class="text-xl font-bold mb-2">Детали заказа:</h2>
+        <table class="table-auto w-full border-collapse border">
+            <thead>
+                <tr>
+                    <th class="px-4 py-2 border">Название</th>
+                    <th class="px-4 py-2 border">Цена</th>
+                    <th class="px-4 py-2 border">Количество</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="px-4 py-2 border">@item.Product.Name</td>
+                        <td class="px-4 py-2 border">$@item.Product.Price</td>
+                        <td class="px-4 py-2 border">@item.Quantity</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="mt-4">
+            <p class="text-xl font-bold mb-2">Итого:</p>
+            <p class="text-lg">Цена товаров: $<span id="totalProductsPrice">@Model.Sum(item => item.Product.Price * item.Quantity)</span></p>
+            <p class="text-lg">Стоимость доставки: $<span id="deliveryFee">0</span></p>
+            <p class="text-xl font-bold mt-2">Итоговая сумма: $<span id="totalOrderPrice">@Model.Sum(item => item.Product.Price * item.Quantity)</span></p>
+        </div>
+
+        <button type="submit" class="px-6 py-3 bg-blue-500 text-white rounded-md mt-4 hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300">Оформить заказ</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('checkoutForm').addEventListener('submit', function (event) {
+        event.preventDefault(); // Отмена действия по умолчанию (отправка формы)
+
+        // Получение данных из формы
+        var paymentMethod = document.getElementById('paymentMethod').value;
+        var deliveryMethod = document.getElementById('deliveryMethod').value;
+
+        // Отправка данных о заказе на сервер
+        fetch(this.action, {
+            method: this.method,
+            body: new FormData(this)
+        })
+            .then(response => response.json())
+            .then(data => {
+                // Проверка успешного оформления заказа
+                if (data.success) {
+                    // Показать уведомление об успешном оформлении заказа
+                    Toastify({
+                        text: "Заказ успешно оформлен!",
+                        duration: 3000, // Продолжительность показа уведомления в миллисекундах
+                        gravity: "bottom", // Позиция уведомления на экране
+                        position: "center", // Выравнивание текста внутри уведомления
+                        backgroundColor: "#4CAF50", // Цвет фона уведомления
+                    }).showToast();
+
+                } else {
+                    // Ошибка при оформлении заказа
+                    alert("Ошибка при оформлении заказа. Пожалуйста, попробуйте снова.");
+                }
+            })
+            .catch(error => console.error('Ошибка:', error));
+    });
+
+    // Обработчик изменения выбора способа доставки
+    document.getElementById('deliveryMethod').addEventListener('change', function () {
+        var selectedOption = this.options[this.selectedIndex];
+        var deliveryFee = selectedOption.getAttribute('data-delivery-fee');
+        document.getElementById('deliveryFee').textContent = deliveryFee;
+        updateTotalOrderPrice();
+    });
+
+    // Функция для обновления итоговой суммы заказа
+    function updateTotalOrderPrice() {
+        var totalProductsPrice = parseFloat(document.getElementById('totalProductsPrice').textContent);
+        var deliveryFee = parseFloat(document.getElementById('deliveryFee').textContent);
+        var totalOrderPrice = totalProductsPrice + deliveryFee;
+        document.getElementById('totalOrderPrice').textContent = totalOrderPrice;
+    }
+
+    // Вызов функции для обновления итоговой суммы заказа при загрузке страницы
+    updateTotalOrderPrice();
+</script>

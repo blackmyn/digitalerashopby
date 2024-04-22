@@ -10,5 +10,6 @@ namespace BLL.Interfaces
 {
     public interface ICategoryService : IService<CategoryDto>
     {
+        CategoryDto GetByName(string name);
     }
 }

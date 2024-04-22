@@ -16,7 +16,6 @@
             background-color: #edf2f7;
         }
 
-        /* Дополнительные стили для улучшения дизайна */
         .product-card {
             transition: transform 0.3s ease-in-out;
         }
@@ -82,7 +81,8 @@
         }
 
         input[type="text"],
-        input[type="password"] {
+        input[type="password"],
+        input[type="email"]{
             width: 100%;
             padding: 0.5rem;
             font-size: 1rem;
@@ -107,13 +107,26 @@
         #message {
             margin-top: 1rem;
         }
+        .product-card-hot {
+            transition: transform 0.3s ease-in-out;
+            width: calc(50% - 12px);
+        }
+            .product-card-hot img {
+                height: auto;
+            }
+
+        .product-card-hot:hover {
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
     <nav class="bg-white shadow">
         <div class="container mx-auto py-4 pl-4 flex justify-between items-center">
             <div>
-                <img src="~/pixelplanet-high-resolution-logo.png" alt="Альтернативный текст" class="h-12" />
+                <a href="@Url.Action("Index", "Home")">
+                    <img src="~/pixelplanet-high-resolution-logo.png" alt="Альтернативный текст" class="h-12" />
+                </a>
             </div>
             <div class="flex-grow ml-10 mr-4">
                 <div class="relative flex">
@@ -122,8 +135,15 @@
                 </div>
             </div>
             <div class="flex items-center space-x-4">
-                <a href="#" class="text-gray-800 hover:text-gray-600"><i class="material-icons">shopping_cart</i></a>
-                <a href="Account/Login" class="text-gray-800 hover:text-gray-600"><i class="material-icons">account_circle</i></a>
+                <a href="@Url.Action("Index", "Cart")" class="text-gray-800 hover:text-gray-600">
+                    <i class="material-icons">shopping_cart</i>
+                </a>
+                @{
+                    var isAuthenticated = User.Identity.IsAuthenticated;
+                    var accountUrl = isAuthenticated ? Url.Action("UserProfile", "Home") : Url.Content("~/Account/Login");
+                    var accountIcon = isAuthenticated ? "account_circle" : "login";
+                }
+                <a href="@accountUrl" class="text-gray-800 hover:text-gray-600"><i class="material-icons">@accountIcon</i></a>
             </div>
         </div>
     </nav>
@@ -194,17 +214,33 @@
                     </li>
                 </ul>
             </div>
-            <div class="md:col-span-1 bg-white-800 text-black py-2 pl-4 rounded">
+            <div class="max-h-96 md:col-span-1 bg-white-800 text-black py-2 pl-4 rounded">
                 <ul class="py-2 space-y-2">
-                    <li><a href="#" class="text-lg hover:text-indigo-600">ПРОЦЕССОРЫ</a></li>
-                    <li><a href="#" class="text-lg hover:text-indigo-600">МАТЕРИНСКИЕ ПЛАТЫ</a></li>
-                    <li><a href="#" class="text-lg hover:text-indigo-600">ВИДЕОКАРТЫ</a></li>
-                    <li><a href="#" class="text-lg hover:text-indigo-600">ПАМЯТЬ</a></li>
-                    <li><a href="#" class="text-lg hover:text-indigo-600">HDD ДИСКИ</a></li>
-                    <li><a href="#" class="text-lg hover:text-indigo-600">SDD ДИСКИ</a></li>
-                    <li><a href="#" class="text-lg hover:text-indigo-600">МОНИТОРЫ</a></li>
-                    <li><a href="#" class="text-lg hover:text-indigo-600">ПИТАНИЕ</a></li>
-                    <li><a href="#" class="text-lg hover:text-indigo-600">АКССЕСУАРЫ</a></li>
+                    <li><a href="@Url.Action("Category", "Home", new { category = "Процессоры" })" class="text-lg hover:text-indigo-600">ПРОЦЕССОРЫ</a></li>
+                    <li>
+                        <a href="@Url.Action("Category", "Home", new { category = "Материнские платы" })" class="text-lg hover:text-indigo-600">МАТЕРИНСКИЕ ПЛАТЫ</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Category", "Home", new { category = "Видеокарты" })" class="text-lg hover:text-indigo-600">ВИДЕОКАРТЫ</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Category", "Home", new { category = "Память" })" class="text-lg hover:text-indigo-600">ПАМЯТЬ</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Category", "Home", new { category = "HDD Диски" })" class="text-lg hover:text-indigo-600">HDD ДИСКИ</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Category", "Home", new { category = "SSD Диски" })" class="text-lg hover:text-indigo-600">SSD ДИСКИ</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Category", "Home", new { category = "Мониторы" })" class="text-lg hover:text-indigo-600">МОНИТОРЫ</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Category", "Home", new { category = "Питание" })" class="text-lg hover:text-indigo-600">ПИТАНИЕ</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Category", "Home", new { category = "Акссесуары" })" class="text-lg hover:text-indigo-600">АКССЕСУАРЫ</a>
+                    </li>
                 </ul>
             </div>
             @RenderBody()
@@ -231,7 +267,6 @@
         </div>
     </div>
 
-    <!-- Подвал -->
     <footer class="bg-gray-800 text-white py-8">
         <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div class="flex flex-col space-y-4">
@@ -275,9 +310,8 @@
             </div>
         </div>
     </footer>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- JavaScript для раскрывающихся категорий -->
     <script>
         $('.relative').hover(function () {
             $(this).find('ul').toggleClass('hidden');

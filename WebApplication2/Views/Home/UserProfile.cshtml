@@ -1,0 +1,55 @@
+﻿@model DLL.Models.ApplicationUser
+
+@{
+    ViewData["Title"] = "User Profile";
+}
+<style>
+    .profile-card {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .profile-picture {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+    }
+
+    .button {
+        background-color: #2d3748;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+
+        .button:hover {
+            background-color: #1a202c;
+        }
+</style>
+
+<div class="container md:col-span-3 flex flex-col items-center justify-center">
+    <h2 class="text-2xl font-bold mb-4">Профиль пользователя</h2>
+
+    <div class="profile-details">
+        <div class="profile-card bg-white p-8 rounded-lg shadow-md">
+            <div class="flex justify-center mb-4">
+                <img src="https://st4.depositphotos.com/3864435/20394/i/600/depositphotos_203941112-stock-photo-raster-icon-man-male-profile.jpg" alt="Profile Picture" class="profile-picture">
+            </div>
+            <div class="text-center mb-4">
+                <h2 class="text-xl font-bold">@Model.FirstName @Model.LastName</h2>
+                <p class="text-gray-600">@Model.Email</p>
+                <p class="text-gray-600">@Model.Address</p>
+            </div>
+            <div class="flex justify-center">
+                <a href="@Url.Action("EditProfile", "Account")" class="button mr-4">Изменить данные</a>
+                <a href="/Account/Logout" class="button">Выйти</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="contact-info">
+        <p>Добавьте свои контактные данные, если они не указаны (имя, фамилия, а также адрес).</p>
+    </div>
+</div>

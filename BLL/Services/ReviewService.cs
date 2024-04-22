@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BLL.DTOModels;
 using BLL.Interfaces;
+using DLL.DB;
 using DLL.Interfaces;
 using DLL.Models;
 using System;
@@ -49,6 +50,11 @@ namespace BLL.Services
         {
             var review = _mapper.Map<Review>(reviewDTO);
             _reviewRepository.Update(review);
+        }
+        public IEnumerable<ReviewDto> GetByProductId(int productId)
+        {
+            var specifications = _reviewRepository.GetAll().Where(spec => spec.ProductId == productId);
+            return _mapper.Map<IEnumerable<ReviewDto>>(specifications);
         }
     }
 

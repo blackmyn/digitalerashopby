@@ -1,0 +1,24 @@
+﻿@model BLL.DTOModels.ApplicationUserDto
+
+@{
+    ViewData["Title"] = "Редактировать профиль";
+}
+<div class="container md:col-span-3 flex flex-col items-center justify-center">
+    <h2 class="text-2xl font-bold mb-4" >@ViewData["Title"]</h2>
+
+    <form asp-action="UpdateProfile" method="post">
+        <div class="form-group">
+            <label asp-for="FirstName">Имя</label>
+            <input asp-for="FirstName" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="LastName">Фамилия</label>
+            <input asp-for="LastName" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Address">Адрес</label>
+            <input asp-for="Address" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form>
+</div>

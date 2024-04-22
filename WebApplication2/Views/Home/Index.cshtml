@@ -7,9 +7,12 @@
     <div>
         <img src="/770X443.jpg" alt="Большая картинка" />
     </div>
-    <h2 class="text-lg pt-4">МОНИТОРЫ BENQ</h2>
+    <div class="w-max">
+        <h2 class="text-lg border-b-2 border-solid border-gray-600 font-bold mt-8">МОНИТОРЫ BENQ</h2>
+    </div>
     <div class="md:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="bg-white shadow-lg rounded-lg overflow-hidden product-card">
+            <a href="@Url.Action("Details", "Product", new { id = 1 })">
             <img src="/BenQ-MOBIUZ-EX2510S-HDR10-FreeSync-165-Hz-IPS-Gaming-Monitor-300x300.jpg" alt="Продукт" class="w-full h-54 object-cover">
             <div class="p-4">
                 <h2 class="text-xl font-bold text-gray-800">BenQ WQ23OP3 27″ 16:9 4K IPS Monitor</h2>
@@ -19,6 +22,7 @@
                     <button class="px-4 py-2 text-white rounded">Купить</button>
                 </div>
             </div>
+            </a>
         </div>
         <div class="bg-white shadow-lg rounded-lg overflow-hidden product-card">
             <img src="/BenQ-PD2705Q-DesignVue-Designer-HDR-IPS-Monitor-300x300.jpg" alt="Продукт" class="w-full h-54 object-cover">
@@ -53,7 +57,9 @@
             </div>
         </div>
     </div>
-    <h2 class="text-lg pt-4">ПИТАНИЕ ОТ COOLER MASTER</h2>
+    <div class="w-max">
+        <h2 class="text-lg border-b-2 border-solid border-gray-600 font-bold mt-8">ПИТАНИЕ ОТ COOLER MASTER</h2>
+    </div>
     <div class="md:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="bg-white shadow-lg rounded-lg overflow-hidden product-card">
             <img src="/cooler1.jpg" alt="Продукт" class="w-full h-54 object-cover">
@@ -99,75 +105,134 @@
             </div>
         </div>
     </div>
-    <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="border-2 border-pink-900 rounded-lg p-4">
-            <h2 class="text-xl font-bold text-black mb-4">ГОРЯЧЕЕ ПРЕДЛОЖЕНИЕ</h2>
-            <div class="bg-white shadow-lg rounded-lg overflow-hidden product-card">
-                <img src="/cooler1.jpg" alt="Продукт" class="w-full h-54 object-cover">
-                <div class="p-4">
-                    <h2 class="text-xl font-bold text-gray-800">Cooler Master MWE 750 V2 80 Plus Bronze SMPS MPE-7501-ACABW-BIN MPE-7501-ACABW-BI</h2>
-                    <p class="mt-2 text-gray-600">80 Plus Bronze SMPS MPE-7501-ACABW-BIN MPE-7501-ACABW-BI</p>
-                    <div class="mt-4 flex justify-between items-center">
-                        <span class="font-bold text-gray-800">Цена: $69.99</span>
-                        <button class="px-4 py-2 text-white rounded">Купить</button>
-                    </div>
+    <div class="w-max">
+        <h2 class="text-xl border-b-2 border-solid border-gray-600 mt-8 font-bold text-black mb-4">ГОРЯЧЕЕ ПРЕДЛОЖЕНИЕ</h2>
+    </div>
+    <div class="md:col-span-3 grid grid-cols-1 md:grid-cols-3 rounded-lg p-4 gap-8">
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden product-card">
+            <img src="/cl-p117-ca14bl-a_02-300x300.jpg" alt="Продукт" class="w-full h-54 object-cover">
+            <div class="p-4">
+                <h2 class="text-xl font-bold text-gray-800">Thermaltake TOUGHAIR 710 Black CPU Cooler CL-P117-CA14BL-A TOUGHAIR 710</h2>
+                <p class="mt-2 text-gray-600">710 Black CPU Cooler CL-P117-CA14BL-A CPU Cooler CL-P117-CA14BL-A</p>
+                <div class="mt-4 flex justify-between items-center">
+                    <span class="font-bold text-gray-800">Цена: $109.99</span>
+                    <button class="px-4 py-2 text-white rounded">Купить</button>
                 </div>
             </div>
         </div>
-        <div class="grid grid-cols-2 gap-4">
-            <div>
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden product-card">
-                    <img src="/cooler1.jpg" alt="Продукт" class="w-full h-54 object-cover">
-                    <div class="p-4">
-                        <h2 class="text-xl font-bold text-gray-800">Cooler Master MWE 750 V2 80 Plus Bronze SMPS MPE-7501-ACABW-BIN MPE-7501-ACABW-BI</h2>
-                        <p class="mt-2 text-gray-600">80 Plus Bronze SMPS MPE-7501-ACABW-BIN MPE-7501-ACABW-BI</p>
-                        <div class="mt-4 flex justify-between items-center">
-                            <span class="font-bold text-gray-800">Цена: $69.99</span>
-                            <button class="px-4 py-2 text-white rounded">Купить</button>
-                        </div>
-                    </div>
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden product-card">
+            <img src="/cmk16gx4m1e3200c16-image-01-600x600-1-300x300.png" alt="Продукт" class="w-full h-54 object-cover">
+            <div class="p-4">
+                <h2 class="text-xl font-bold text-gray-800">Corsair Vengeance LPX 16GB (16GBx1) 3200MHz DDR4 Desktop Memory</h2>
+                <p class="mt-2 text-gray-600">16GB (16GBx1) 3200MHz DDR4 CMK16GX4M1E3200C16</p>
+                <div class="mt-4 flex justify-between items-center">
+                    <span class="font-bold text-gray-800">Цена: $39.99</span>
+                    <button class="px-4 py-2 text-white rounded">Купить</button>
                 </div>
             </div>
-            <div>
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden product-card">
-                    <img src="/cooler1.jpg" alt="Продукт" class="w-full h-54 object-cover">
-                    <div class="p-4">
-                        <h2 class="text-xl font-bold text-gray-800">Cooler Master MWE 750 V2 80 Plus Bronze SMPS MPE-7501-ACABW-BIN MPE-7501-ACABW-BI</h2>
-                        <p class="mt-2 text-gray-600">80 Plus Bronze SMPS MPE-7501-ACABW-BIN MPE-7501-ACABW-BI</p>
-                        <div class="mt-4 flex justify-between items-center">
-                            <span class="font-bold text-gray-800">Цена: $69.99</span>
-                            <button class="px-4 py-2 text-white rounded">Купить</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden product-card">
-                    <img src="/cooler1.jpg" alt="Продукт" class="w-full h-54 object-cover">
-                    <div class="p-4">
-                        <h2 class="text-xl font-bold text-gray-800">Cooler Master MWE 750 V2 80 Plus Bronze SMPS MPE-7501-ACABW-BIN MPE-7501-ACABW-BI</h2>
-                        <p class="mt-2 text-gray-600">80 Plus Bronze SMPS MPE-7501-ACABW-BIN MPE-7501-ACABW-BI</p>
-                        <div class="mt-4 flex justify-between items-center">
-                            <span class="font-bold text-gray-800">Цена: $69.99</span>
-                            <button class="px-4 py-2 text-white rounded">Купить</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden product-card">
-                    <img src="/cooler1.jpg" alt="Продукт" class="w-full h-54 object-cover">
-                    <div class="p-4">
-                        <h2 class="text-xl font-bold text-gray-800">Cooler Master MWE 750 V2 80 Plus Bronze SMPS MPE-7501-ACABW-BIN MPE-7501-ACABW-BI</h2>
-                        <p class="mt-2 text-gray-600">80 Plus Bronze SMPS MPE-7501-ACABW-BIN MPE-7501-ACABW-BI</p>
-                        <div class="mt-4 flex justify-between items-center">
-                            <span class="font-bold text-gray-800">Цена: $69.99</span>
-                            <button class="px-4 py-2 text-white rounded">Купить</button>
-                        </div>
-                    </div>
+        </div>
+
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden product-card">
+            <img src="/Radeon-RX-7900-GRE-Challenger-16GB-OCL2-300x300.jpg" alt="Продукт" class="w-full h-54 object-cover">
+            <div class="p-4">
+                <h2 class="text-xl font-bold text-gray-800">Asrock AMD Radeon RX 7900 GRE Challenger 16GB OC Graphic Card RX7900GRE CL 16GO</h2>
+                <p class="mt-2 text-gray-600">Challenger 16GB OC Graphic Card RX7900GRE CL 16GO</p>
+                <div class="mt-4 flex justify-between items-center">
+                    <span class="font-bold text-gray-800">Цена: $459.99</span>
+                    <button class="px-4 py-2 text-white rounded">Купить</button>
                 </div>
             </div>
         </div>
     </div>
+    <div class="w-max">
+        <h2 class="text-xl border-b-2 border-solid border-gray-600 mt-8 font-bold text-black">ПАМЯТЬ ОТ CORSAIR</h2>
+    </div>
+    <div class="md:col-span-3 grid grid-cols-1 md:grid-cols-3 rounded-lg p-4 gap-8">
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden product-card">
+            <img src="/corsair1.jpg" alt="Продукт" class="w-full h-54 object-cover">
+            <div class="p-4">
+                <h2 class="text-xl font-bold text-gray-800">Corsair Vengeance LPX 64GB (2 x 32GB) DDR4 DRAM 3600MHz C18 Memory Kit – Black CMK64GX4M2D3600C18</h2>
+                <p class="mt-2 text-gray-600">(2 x 32GB) DDR4 DRAM 3600MHz C18 Memory Kit</p>
+                <div class="mt-4 flex justify-between items-center">
+                    <span class="font-bold text-gray-800">Цена: $159.99</span>
+                    <button class="px-4 py-2 text-white rounded">Купить</button>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden product-card">
+            <img src="/corsair2.jpg" alt="Продукт" class="w-full h-54 object-cover">
+            <div class="p-4">
+                <h2 class="text-xl font-bold text-gray-800">CORSAIR Vengeance LPX 16GB DDR4 3600MHz Memory CMK16GX4M1Z3600C18 LPX 16GB DDR4 3600MHz Memory</h2>
+                <p class="mt-2 text-gray-600">16GB DDR4 3600MHz Memory LPX 16GB DDR4 3600MHz Memory</p>
+                <div class="mt-4 flex justify-between items-center">
+                    <span class="font-bold text-gray-800">Цена: $99.99</span>
+                    <button class="px-4 py-2 text-white rounded">Купить</button>
+                </div>
+            </div>
+        </div>
 
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden product-card">
+            <img src="/corsair3.jpg" alt="Продукт" class="w-full h-54 object-cover">
+            <div class="p-4">
+                <h2 class="text-xl font-bold text-gray-800">Corsair Vengeance 64GB (2x32GB) DDR5 6000MHz C40 Black Memory Kit CMK64GX5M2B6000C40</h2>
+                <p class="mt-2 text-gray-600">64GB (2x32GB) DDR5 6000MHz C40 Black Memory Kit</p>
+                <div class="mt-4 flex justify-between items-center">
+                    <span class="font-bold text-gray-800">Цена: $259.99</span>
+                    <button class="px-4 py-2 text-white rounded">Купить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <img class="my-4" src="~/corsair-smps-banner.jpg" alt="Alternate Text" />
+        <div class="md:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <img src="/Wireless-Mouse.jpg" alt="Alternate Text" />
+            </div>
+            <div>
+                <img src="/Mechanical-Keyboard.jpg" alt="Alternate Text" />
+            </div>
+        </div>
+    </div>
+    <div class="w-max">
+        <h2 class="text-xl border-b-2 border-solid border-gray-600 mt-4 font-bold text-black mb-4">ПРОЦЕССОРЫ AMD</h2>
+    </div>
+    <div class="md:col-span-3 grid grid-cols-1 md:grid-cols-3 rounded-lg p-4 gap-8">
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden product-card">
+            <img src="/amd1.jpg" alt="Продукт" class="w-full h-54 object-cover">
+            <div class="p-4">
+                <h2 class="text-xl font-bold text-gray-800">
+                    AMD Ryzen 7 5700 Desktop Processor AMD Radeon 3.6 GHz Socket AM4 65W Graphics Processor 100-000000743BOX
+                </h2>
+                <p class="mt-2 text-gray-600">AMD Ryzen 7 5700</p>
+                <div class="mt-4 flex justify-between items-center">
+                    <span class="font-bold text-gray-800">Цена: $309.99</span>
+                    <button class="px-4 py-2 text-white rounded">Купить</button>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden product-card">
+            <img src="/amd2.jpg" alt="Продукт" class="w-full h-54 object-cover">
+            <div class="p-4">
+                <h2 class="text-xl font-bold text-gray-800">AMD Ryzen 5 5500GT Ryzen 5 5000 Series 6-Core 3.6 GHz Socket AM4 65W AMD Radeon Graphics Processor 100-100001489BOX</h2>
+                <p class="mt-2 text-gray-600">AMD Ryzen 5 5500GT Ryzen 5 5000 Series</p>
+                <div class="mt-4 flex justify-between items-center">
+                    <span class="font-bold text-gray-800">Цена: $409.99</span>
+                    <button class="px-4 py-2 text-white rounded">Купить</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden product-card">
+            <img src="/amd3.jpg" alt="Продукт" class="w-full h-54 object-cover">
+            <div class="p-4">
+                <h2 class="text-xl font-bold text-gray-800">AMD Ryzen 7 5700X3D Ryzen 7 5000 Series 8-Core 3.0 GHz Socket AM4 105W Processor 100-100001503WOF</h2>
+                <p class="mt-2 text-gray-600">AMD Ryzen 7 5700X3D Ryzen 7 5000 Series</p>
+                <div class="mt-4 flex justify-between items-center">
+                    <span class="font-bold text-gray-800">Цена: $459.99</span>
+                    <button class="px-4 py-2 text-white rounded">Купить</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

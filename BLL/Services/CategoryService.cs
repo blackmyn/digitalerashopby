@@ -50,6 +50,11 @@ namespace BLL.Services
             var category = _mapper.Map<Category>(categoryDTO);
             _categoryRepository.Update(category);
         }
+        public CategoryDto GetByName(string name)
+        {
+            var category = _categoryRepository.GetByName(name);
+            return _mapper.Map<CategoryDto>(category);
+        }
     }
 
 }

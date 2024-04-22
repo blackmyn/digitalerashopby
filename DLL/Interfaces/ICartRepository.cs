@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DLL.Interfaces
 {
-    public interface ICartRepository : IService<Cart>
+    public interface ICartRepository : IRepository<Cart>
     {
     }
 }
