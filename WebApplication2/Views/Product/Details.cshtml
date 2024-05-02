@@ -13,10 +13,13 @@
             <div class="border-l-2 pl-4 mt-10">
                 <h2 class="text-lg font-bold mb-4">Характеристики товара</h2>
                 <ul>
-                    @foreach (var specification in ViewData["Specifications"] as List<BLL.DTOModels.SpecificationDto>)
+                    @for (var i = 0; i < (ViewData["Specifications"] as List<BLL.DTOModels.ProdSpecDto>).Count; i++)
                     {
+                        var specification = (ViewData["Specifications"] as List<BLL.DTOModels.ProdSpecDto>)[i];
+                        var characteristicName = (ViewData["CharacteristicNames"] as List<string>)[i];
+
                         <li class="mb-2">
-                            <span class="font-semibold">@specification.Key:</span>
+                            <span class="font-semibold">@characteristicName:</span>
                             <span>@specification.Value</span>
                         </li>
                     }
@@ -65,7 +68,23 @@
                 Товар успешно добавлен в корзину!
             </div>
 
-            <div class="border-l-2 pl-4 mt-56">
+            <div class="border-l-2 pl-4 mt-8 md:mt-20">
+                <h2 class="text-lg font-bold mb-4">Написать отзыв</h2>
+                <form id="reviewForm" method="post" asp-controller="Product" asp-action="WriteReview">
+                    <input type="hidden" name="productId" value="@Model.Id" />
+                    <div class="mb-4">
+                        <label for="rating" class="block font-semibold">Рейтинг:</label>
+                        <input type="number" id="rating" name="rating" min="1" max="10" class="border border-gray-300 rounded-md px-3 py-2 mt-1 w-full focus:outline-none focus:ring focus:border-blue-300">
+                    </div>
+                    <div class="mb-4">
+                        <label for="comment" class="block font-semibold">Отзыв:</label>
+                        <textarea id="comment" name="comment" rows="3" class="border border-gray-300 rounded-md px-3 py-2 mt-1 w-full focus:outline-none focus:ring focus:border-blue-300"></textarea>
+                    </div>
+                    <button type="submit" class="px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300">Отправить отзыв</button>
+                </form>
+            </div>
+
+            <div class="border-l-2 pl-4 mt-8">
                 <h2 class="text-lg font-bold mb-4">Отзывы пользователей</h2>
                 <ul>
                     @foreach (var review in ViewData["Reviews"] as List<BLL.DTOModels.ReviewDto>)
@@ -110,4 +129,3 @@
             .catch(error => console.error('Ошибка:', error));
     });
 </script>
-

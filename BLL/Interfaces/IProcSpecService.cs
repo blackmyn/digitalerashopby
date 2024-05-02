@@ -9,6 +9,6 @@ namespace BLL.Interfaces
 {
     public interface IProcSpecService : IService<ProdSpecDto>
     {
-        IEnumerable<ProdSpecDto> GetByProductId(int productId);
+        public IEnumerable<ProdSpecDto> GetByProductId(int productId);
     }
 }

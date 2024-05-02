@@ -53,17 +53,30 @@ namespace BLL.Services
             var product = _mapper.Map<Product>(productDTO);
             _productRepository.Update(product);
         }
-        public IEnumerable<ProductDto> GetProductsByCategory(string category)
+        public IEnumerable<ProductDto> GetProductsByCategory(string category, string sort)
         {
-            // Получите все категории
             var categories = _categoryService.GetAll();
-
-            // Получите товары только для выбранной категории
             var products = _productRepository.GetAll().Where(p => p.Category.Name == category);
-
-            // Здесь вы можете использовать категории для дополнительной обработки, если нужно
-
-            // Маппинг товаров и возврат результата
+            switch (sort)
+            {
+                case "price_asc":
+                    products = products.OrderBy(p => p.Price);
+                    break;
+                case "price_desc":
+                    products = products.OrderByDescending(p => p.Price);
+                    break;
+                case "name_asc":
+                    products = products.OrderBy(p => p.Name);
+                    break;
+                case "name_desc":
+                    products = products.OrderByDescending(p => p.Name);
+                    break;
+            }
+            return _mapper.Map<IEnumerable<ProductDto>>(products);
+        }
+        public IEnumerable<ProductDto> GetProductsByName(string name)
+        {
+            var products = _productRepository.GetAll().Where(p => p.Name.Contains(name));
             return _mapper.Map<IEnumerable<ProductDto>>(products);
         }
 

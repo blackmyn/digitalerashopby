@@ -54,9 +54,11 @@
             width: 5.5rem;
             margin-left: 1rem;
         }
+
         .subcategories {
             display: none;
         }
+
         .category-item:hover .subcategories {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -82,7 +84,7 @@
 
         input[type="text"],
         input[type="password"],
-        input[type="email"]{
+        input[type="email"] {
             width: 100%;
             padding: 0.5rem;
             font-size: 1rem;
@@ -107,17 +109,35 @@
         #message {
             margin-top: 1rem;
         }
+
         .product-card-hot {
             transition: transform 0.3s ease-in-out;
             width: calc(50% - 12px);
         }
+
             .product-card-hot img {
                 height: auto;
             }
 
-        .product-card-hot:hover {
-            transform: scale(1.05);
+            .product-card-hot:hover {
+                transform: scale(1.05);
+            }
+
+        #searchResults {
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid #000;
+            border-radius: 0.25rem;
+            padding: 0.5rem;
+            position: absolute;
+            width: calc(100%);
+            transition: opacity 0.3s ease-in-out;
+            z-index: 10;
         }
+
+            #searchResults.hidden {
+                opacity: 0;
+            }
+
     </style>
 </head>
 <body>
@@ -130,8 +150,8 @@
             </div>
             <div class="flex-grow ml-10 mr-4">
                 <div class="relative flex">
-                    <input type="text" placeholder="Найти что-то..." class="border-solid border-gray-800 py-2 pl-4 rounded-l-md focus:outline-none focus:border-purple-900 transition duration-150 ease-in-out search-input">
-                    <button class="px-4 py-2 text-white rounded focus:outline-none search-button">Поиск</button>
+                    <input type="text" id="searchInput" placeholder="Найти что-то..." class="border-solid border-gray-800 py-2 pl-4 rounded-l-md focus:outline-none focus:border-purple-900 transition duration-150 ease-in-out search-input">
+                    <div id="searchResults" class="rounded mt-14 hidden w-full"></div>
                 </div>
             </div>
             <div class="flex items-center space-x-4">
@@ -160,11 +180,11 @@
                         <a href="#" class="text-lg footer-link">ТОПОВЫЕ ПРЕДЛОЖЕНИЯ!</a>
                         <ul class="absolute top-full left-0 hidden group-hover:block bg-white py-2 rounded-md shadow-lg">
                             <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">РАСПРОДАЖА APPLE</a></li>
-                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">ПРОЦЕССОРЫ</a></li>
-                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">МАТЕРИНСКИЕ ПЛАТЫ</a></li>
-                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">ВИДЕОКАРТЫ</a></li>
-                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">ОПЕРАТИВНАЯ ПАМЯТЬ</a></li>
-                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">ЖЕСТКИЕ ДИСКИ</a></li>
+                            <li><a href="@Url.Action("Category", "Home", new { category = "Процессоры" })" class="block px-4 py-2 hover:text-indigo-600">ПРОЦЕССОРЫ</a></li>
+                            <li><a href="@Url.Action("Category", "Home", new { category = "Материнские платы" })" class="block px-4 py-2 hover:text-indigo-600">МАТЕРИНСКИЕ ПЛАТЫ</a></li>
+                            <li><a href="@Url.Action("Category", "Home", new { category = "Видеокарты" })" class="block px-4 py-2 hover:text-indigo-600">ВИДЕОКАРТЫ</a></li>
+                            <li><a href="@Url.Action("Category", "Home", new { category = "Память" })" class="block px-4 py-2 hover:text-indigo-600">ОПЕРАТИВНАЯ ПАМЯТЬ</a></li>
+                            <li><a href="@Url.Action("Category", "Home", new { category = "SSD Диски" })" class="block px-4 py-2 hover:text-indigo-600">ЖЕСТКИЕ ДИСКИ</a></li>
                         </ul>
                     </li>
                     <li class="relative group">
@@ -172,99 +192,117 @@
                         <ul class="absolute top-full left-0 hidden group-hover:block bg-white py-2 rounded-md shadow-lg">
                             <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">AMD СБОРКИ</a></li>
                             <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">INTEL СБОРКИ</a></li>
-                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">ПРОЦЕССОРЫ</a></li>
-                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">МАТЕРИНСКИЕ ПЛАТЫ</a></li>
-                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">ВИДЕОКАРТЫ</a></li>
-                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">ОПЕРАТИВНАЯ ПАМЯТЬ</a></li>
-                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">ЖЕСТКИЕ ДИСКИ</a></li>
-                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">БЛОКИ ПИТАНИЯ</a></li>
-                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">КОРПУСА</a></li>
-                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">ОХЛАЖДЕНИЕ</a></li>
-                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">СЕТЕВЫЕ УСТРОЙСТВА</a></li>
+                            <li><a href="@Url.Action("Category", "Home", new { category = "Processors" })" class="block px-4 py-2 hover:text-indigo-600">ПРОЦЕССОРЫ</a></li>
+                            <li>
+                                <a href="@Url.Action("Category", "Home", new { category = "Motherboards" })" class="block px-4 py-2 hover:text-indigo-600">МАТЕРИНСКИЕ ПЛАТЫ</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Category", "Home", new { category = "Videocards" })" class="block px-4 py-2 hover:text-indigo-600">ВИДЕОКАРТЫ</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Category", "Home", new { category = "Memory" })" class="block px-4 py-2 hover:text-indigo-600">ПАМЯТЬ</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Category", "Home", new { category = "HDD Disks" })" class="block px-4 py-2 hover:text-indigo-600">HDD ДИСКИ</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Category", "Home", new { category = "SSD Disks" })" class="block px-4 py-2 hover:text-indigo-600">SSD ДИСКИ</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Category", "Home", new { category = "Power Supply" })" class="block px-4 py-2 hover:text-indigo-600">ПИТАНИЕ</a>
+                            </li>
+                            <li><a href="@Url.Action("Category", "Home", new { category = "Корпус" })" class="block px-4 py-2 hover:text-indigo-600">КОРПУСА</a></li>
+                            <li><a href="@Url.Action("Category", "Home", new { category = "Охлаждение" })" class="block px-4 py-2 hover:text-indigo-600">ОХЛАЖДЕНИЕ</a></li>
+                            <li><a href="@Url.Action("Category", "Home", new { category = "Сеть" })" class="block px-4 py-2 hover:text-indigo-600">СЕТЕВЫЕ УСТРОЙСТВА</a></li>
                         </ul>
                     </li>
                     <li class="relative group">
                         <a href="#" class="text-lg footer-link">КОМПЬТЕРЫ И НОУТБУКИ</a>
                         <ul class="absolute top-full left-0 hidden group-hover:block bg-white py-2 rounded-md shadow-lg">
-                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">ПЕРСОНАЛЬНЫЕ КОМПЬЮТЕРЫ</a></li>
-                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">НОУТБУКИ</a></li>
-                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">МОНОБЛОКИ</a></li>
-                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">РАБОЧИЕ СТАНЦИИ</a></li>
-                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">СЕРВЕРА</a></li>
+                            <li><a href="@Url.Action("Category", "Home", new { category = "PC" })" class="block px-4 py-2 hover:text-indigo-600">ПЕРСОНАЛЬНЫЕ КОМПЬЮТЕРЫ</a></li>
+                            <li><a href="@Url.Action("Category", "Home", new { category = "Laptops" })" class="block px-4 py-2 hover:text-indigo-600">НОУТБУКИ</a></li>
+                            <li><a href="@Url.Action("Category", "Home", new { category = "Моноблок" })" class="block px-4 py-2 hover:text-indigo-600">МОНОБЛОКИ</a></li>
+                            <li><a href="@Url.Action("Category", "Home", new { category = "РС" })" class="block px-4 py-2 hover:text-indigo-600">РАБОЧИЕ СТАНЦИИ</a></li>
+                            <li><a href="@Url.Action("Category", "Home", new { category = "Сервера" })" class="block px-4 py-2 hover:text-indigo-600">СЕРВЕРА</a></li>
                         </ul>
                     </li>
                     <li class="relative group">
                         <a href="#" class="text-lg footer-link">&nbsp;ТЕХНИКА APPLE</a>
                         <ul class="absolute top-full left-0 hidden group-hover:block bg-white py-2 rounded-md shadow-lg">
-                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">MACBOOK</a></li>
-                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">IPAD</a></li>
-                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">IPHONE</a></li>
-                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">AIRPODS</a></li>
-                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">APPLE WATCH</a></li>
+                            <li><a href="@Url.Action("Category", "Home", new { category = "Macbook" })" class="block px-4 py-2 hover:text-indigo-600">MACBOOK</a></li>
+                            <li><a href="@Url.Action("Category", "Home", new { category = "Ipad" })" class="block px-4 py-2 hover:text-indigo-600">IPAD</a></li>
+                            <li><a href="@Url.Action("Category", "Home", new { category = "Iphone" })" class="block px-4 py-2 hover:text-indigo-600">IPHONE</a></li>
+                            <li><a href="@Url.Action("Category", "Home", new { category = "Airpods" })" class="block px-4 py-2 hover:text-indigo-600">AIRPODS</a></li>
+                            <li><a href="@Url.Action("Category", "Home", new { category = "Applewatch" })" class="block px-4 py-2 hover:text-indigo-600">APPLE WATCH</a></li>
                         </ul>
                     </li>
                     <li class="relative group">
                         <a href="#" class="text-lg footer-link">&nbsp;&nbsp;ПЕРИФЕРИЯ</a>
                         <ul class="absolute top-full left-0 hidden group-hover:block bg-white py-2 rounded-md shadow-lg">
-                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">МЫШИ</a></li>
-                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">КЛАВИАТУРЫ</a></li>
-                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">НАУШНИКИ</a></li>
-                            <li><a href="#" class="block px-4 py-2 hover:text-indigo-600">АКССЕСУАРЫ</a></li>
+                            <li><a href="@Url.Action("Category", "Home", new { category = "Mouse" })" class="block px-4 py-2 hover:text-indigo-600">МЫШИ</a></li>
+                            <li><a href="@Url.Action("Category", "Home", new { category = "Keyboard" })" class="block px-4 py-2 hover:text-indigo-600">КЛАВИАТУРЫ</a></li>
+                            <li><a href="@Url.Action("Category", "Home", new { category = "Headset" })" class="block px-4 py-2 hover:text-indigo-600">НАУШНИКИ</a></li>
+                            <li><a href="@Url.Action("Category", "Home", new { category = "Акссесуары" })" class="block px-4 py-2 hover:text-indigo-600">АКССЕСУАРЫ</a></li>
+                            <li><a href="@Url.Action("Category", "Home", new { category = "Monitors" })" class="block px-4 py-2 hover:text-indigo-600">МОНИТОРЫ</a></li>
                         </ul>
                     </li>
                 </ul>
             </div>
             <div class="max-h-96 md:col-span-1 bg-white-800 text-black py-2 pl-4 rounded">
                 <ul class="py-2 space-y-2">
-                    <li><a href="@Url.Action("Category", "Home", new { category = "Процессоры" })" class="text-lg hover:text-indigo-600">ПРОЦЕССОРЫ</a></li>
+                    <li><a href="@Url.Action("Category", "Home", new { category = "Processors" })" class="text-lg hover:text-indigo-600">ПРОЦЕССОРЫ</a></li>
                     <li>
-                        <a href="@Url.Action("Category", "Home", new { category = "Материнские платы" })" class="text-lg hover:text-indigo-600">МАТЕРИНСКИЕ ПЛАТЫ</a>
+                        <a href="@Url.Action("Category", "Home", new { category = "Motherboards" })" class="text-lg hover:text-indigo-600">МАТЕРИНСКИЕ ПЛАТЫ</a>
                     </li>
                     <li>
-                        <a href="@Url.Action("Category", "Home", new { category = "Видеокарты" })" class="text-lg hover:text-indigo-600">ВИДЕОКАРТЫ</a>
+                        <a href="@Url.Action("Category", "Home", new { category = "Videocards" })" class="text-lg hover:text-indigo-600">ВИДЕОКАРТЫ</a>
                     </li>
                     <li>
-                        <a href="@Url.Action("Category", "Home", new { category = "Память" })" class="text-lg hover:text-indigo-600">ПАМЯТЬ</a>
+                        <a href="@Url.Action("Category", "Home", new { category = "Memory" })" class="text-lg hover:text-indigo-600">ПАМЯТЬ</a>
                     </li>
                     <li>
-                        <a href="@Url.Action("Category", "Home", new { category = "HDD Диски" })" class="text-lg hover:text-indigo-600">HDD ДИСКИ</a>
+                        <a href="@Url.Action("Category", "Home", new { category = "HDD Disks" })" class="text-lg hover:text-indigo-600">HDD ДИСКИ</a>
                     </li>
                     <li>
-                        <a href="@Url.Action("Category", "Home", new { category = "SSD Диски" })" class="text-lg hover:text-indigo-600">SSD ДИСКИ</a>
+                        <a href="@Url.Action("Category", "Home", new { category = "SSD Disks" })" class="text-lg hover:text-indigo-600">SSD ДИСКИ</a>
                     </li>
                     <li>
-                        <a href="@Url.Action("Category", "Home", new { category = "Мониторы" })" class="text-lg hover:text-indigo-600">МОНИТОРЫ</a>
+                        <a href="@Url.Action("Category", "Home", new { category = "Monitors" })" class="text-lg hover:text-indigo-600">МОНИТОРЫ</a>
                     </li>
                     <li>
-                        <a href="@Url.Action("Category", "Home", new { category = "Питание" })" class="text-lg hover:text-indigo-600">ПИТАНИЕ</a>
+                        <a href="@Url.Action("Category", "Home", new { category = "Power Supply" })" class="text-lg hover:text-indigo-600">ПИТАНИЕ</a>
                     </li>
                     <li>
-                        <a href="@Url.Action("Category", "Home", new { category = "Акссесуары" })" class="text-lg hover:text-indigo-600">АКССЕСУАРЫ</a>
+                        <a href="@Url.Action("Category", "Home", new { category = "Accessories" })" class="text-lg hover:text-indigo-600">АКССЕСУАРЫ</a>
                     </li>
                 </ul>
             </div>
             @RenderBody()
         </div>
-        <div class="bg-white-800 text-black py-2 pl-4 rounded">
-            <div class="flex items-center space-x-52 w-full">
-                <div class="flex items-center">
-                    <i class="material-icons text-2xl text-gray-600">security</i>
-                    <p class="text-lg pl-2">Высокое качество товаров</p>
-                </div>
-                <div class="flex items-center">
-                    <i class="material-icons text-2xl text-gray-600">access_time</i>
-                    <p class="text-lg pl-2">Быстрая доставка</p>
-                </div>
-                <div class="flex items-center">
-                    <i class="material-icons text-2xl text-gray-600">monetization_on</i>
-                    <p class="text-lg pl-2">Привлекательные цены</p>
-                </div>
-                <div class="flex items-center">
-                    <i class="material-icons text-2xl text-gray-600">thumbs_up_down</i>
-                    <p class="text-lg pl-2">Гарантия удовлетворения</p>
+        <div class="md:col-span-1">
+            <div class="bg-white-800 text-black py-2 rounded">
+                <div class="grid grid-cols-4">
+                    <div class="flex items-center justify-center">
+                        <i class="material-icons text-2xl text-gray-600">security</i>
+                        <p class="text-lg pl-2">Высокое качество товаров</p>
+                    </div>
+                    <div class="flex items-center justify-center">
+                        <i class="material-icons text-2xl text-gray-600">access_time</i>
+                        <p class="text-lg pl-2">Быстрая доставка</p>
+                    </div>
+                    <div class="flex items-center justify-center">
+                        <i class="material-icons text-2xl text-gray-600">monetization_on</i>
+                        <p class="text-lg pl-2">Привлекательные цены</p>
+                    </div>
+                    <div class="flex items-center justify-center">
+                        <i class="material-icons text-2xl text-gray-600">thumbs_up_down</i>
+                        <p class="text-lg pl-2">Гарантия удовлетворения</p>
+                    </div>
                 </div>
             </div>
         </div>
+
+
     </div>
 
     <footer class="bg-gray-800 text-white py-8">
@@ -316,6 +354,35 @@
         $('.relative').hover(function () {
             $(this).find('ul').toggleClass('hidden');
         });
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#searchInput').on('input', function () {
+                var searchTerm = $(this).val();
+                if (searchTerm.length >= 3) {
+                    $.ajax({
+                        url: '@Url.Action("SearchProducts", "Home")',
+                        type: 'GET',
+                        data: { searchTerm: searchTerm },
+                        success: function (result) {
+                            $('#searchResults').html(result);
+                            $('#searchResults').removeClass('hidden');
+                        }
+                    });
+                } else {
+                    $('#searchResults').addClass('hidden');
+                }
+            });
+
+            // Скрытие панели с найденными товарами при клике в любом месте на странице, кроме области поиска
+            $(document).on('click', function (e) {
+                if (!$(e.target).closest('#searchResults').length && !$(e.target).is('#searchInput')) {
+                    $('#searchResults').addClass('hidden');
+                }
+            });
+        });
+
     </script>
 </body>
 </html>

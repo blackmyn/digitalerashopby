@@ -53,7 +53,7 @@ namespace BLL.Services
         }
         public IEnumerable<ProdSpecDto> GetByProductId(int productId)
         {
-            var specifications = _prodspecRepository.GetAll().Where(spec => spec.ProductId == productId);
+            var specifications = _prodspecRepository.GetAll().Where(spec => spec.CategoryId == productId);
             return _mapper.Map<IEnumerable<ProdSpecDto>>(specifications);
         }
     }

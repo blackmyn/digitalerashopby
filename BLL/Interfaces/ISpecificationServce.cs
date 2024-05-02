@@ -11,6 +11,6 @@ namespace BLL.Interfaces
 {
     public interface ISpecificationServce : IService<SpecificationDto>
     {
-        IEnumerable<SpecificationDto> GetByProductId(int productId);
+        public string GetCharacteristicNameById(int characteristicId);
     }
 }

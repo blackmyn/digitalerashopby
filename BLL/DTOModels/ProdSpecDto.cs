@@ -10,11 +10,11 @@ namespace BLL.DTOModels
     public class ProdSpecDto
     {
         public int Id { get; set; }
-        public int ProductId { get; set; }
+        public int CategoryId { get; set; }
         public int CharacteristicId { get; set; }
         public string Value { get; set; }
 
-        public Product Product { get; set; }
-        public Specification Specification { get; set; }
+        public CategoryDto Category { get; set; }
+        public SpecificationDto Specification { get; set; }
     }
 }

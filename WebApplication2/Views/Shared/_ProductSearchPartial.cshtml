@@ -1,0 +1,14 @@
+﻿@model IEnumerable<BLL.DTOModels.ProductDto>
+
+<h2 class="ml-4 text-xl text-gray-800">Найденные товары</h2>
+@foreach (var product in Model)
+{
+    <div class="flex items-center justify-between border-b border-gray-200 py-2">
+        <div class="ml-4">
+            <h3 class="text-lg font-bold text-gray-800"> <a href="@Url.Action("Details", "Product", new { id = @product.Id })" class="rounded">@product.Name</a> </h3>
+            <div class="mt-2">
+                <span class="font-lg text-gray-800">$@product.Price</span>
+            </div>
+        </div>
+    </div>
+}

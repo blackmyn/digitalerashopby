@@ -31,6 +31,7 @@ builder.Services.AddAutoMapper(typeof(BLL.Mappers.OrderItemMappingProfile));
 builder.Services.AddAutoMapper(typeof(BLL.Mappers.OrderMappingProfile));
 builder.Services.AddAutoMapper(typeof(BLL.Mappers.PaymentMappingProfile));
 builder.Services.AddAutoMapper(typeof(BLL.Mappers.ReviewMappingProfile));
+builder.Services.AddAutoMapper(typeof(BLL.Mappers.ProdSpecMappingProfile));
 builder.Services.AddAutoMapper(typeof(BLL.Mappers.SpecificationMappingProfile));
 
 builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
@@ -62,6 +63,9 @@ builder.Services.AddScoped<IProductService, ProductService>();
 
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
+
+builder.Services.AddScoped<IProdSpec, ProdSpecRepository>();
+builder.Services.AddScoped<IProcSpecService, ProdSpecService>();
 
 builder.Services.AddScoped<ISpecificationRepository, SpecificationRepository>();
 builder.Services.AddScoped<ISpecificationServce, SpecificationService>();

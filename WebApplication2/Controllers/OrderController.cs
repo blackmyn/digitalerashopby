@@ -54,20 +54,17 @@ namespace WebApplication2.Controllers
 
             var cartItems = _cartService.GetCartItemsForUser(user.Id);
 
-            // Создание нового заказа
             var orderId = await _orderService.PlaceOrderAsync(user.Id, cartItems, paymentMethod, deliveryMethod);
 
-            // Добавление записи об оплате
             var paymentDto = new PaymentDto
             {
                 PaymentMethod = paymentMethod,
                 PaymentDate = DateTime.Now,
-                Status = "Done", // или любой другой статус по умолчанию
+                Status = "Done",
                 OrderId = orderId
             };
             _paymentService.Add(paymentDto);
 
-            // Добавление записи о доставке
             var deliveryDto = new DeliveryDto
             {
                 DeliveryMethod = deliveryMethod,
@@ -77,7 +74,6 @@ namespace WebApplication2.Controllers
             };
             _deliveryService.Add(deliveryDto);
 
-            // Добавление записей об элементах заказа
             //foreach (var item in cartItems)
             //{
             //    var orderItemDto = new OrderItemDto
@@ -90,7 +86,6 @@ namespace WebApplication2.Controllers
             //    _orderItemService.Add(orderItemDto);
             //}
 
-            // Очистка корзины после успешного оформления заказа
 
             return RedirectToAction("OrderConfirmation");
         }

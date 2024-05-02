@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using DLL.Models;
 using BLL.Interfaces;
 using BLL.Services;
+using BLL.DTOModels;
 
 namespace WebApplication2.Controllers
 {
@@ -36,7 +37,7 @@ namespace WebApplication2.Controllers
         {
             return View();
         }
-        public IActionResult Category(string category)
+        public IActionResult Category(string category, string sort)
         {
             var selectedCategory = _categoryService.GetByName(category);
             if (selectedCategory == null)
@@ -44,10 +45,42 @@ namespace WebApplication2.Controllers
                 return NotFound();
             }
 
-            var productsByCategory = _productService.GetProductsByCategory(selectedCategory.Name);
 
+            var productsByCategory = _productService.GetProductsByCategory(selectedCategory.Name, sort);
+
+            ViewData["Category"] = selectedCategory.Name;
+            ViewData["CategoryId"] = selectedCategory.Id;
             return View(productsByCategory);
         }
+
+        [HttpGet]
+        public IActionResult SortProducts(string category, string sort)
+        {
+            var selectedCategory = _categoryService.GetByName(category);
+            if (selectedCategory == null)
+            {
+                return NotFound();
+            }
+
+            var productsByCategory = _productService.GetProductsByCategory(selectedCategory.Name, sort);
+
+            ViewData["Category"] = selectedCategory.Name;
+            ViewData["CategoryId"] = selectedCategory.Id;
+
+            return PartialView("_ProductListPartial", productsByCategory);
+        }
+
+        [HttpGet]
+        public IActionResult SearchProducts(string searchTerm)
+        {
+            var products = _productService.GetAll();
+            var lowerCaseSearchTerm = searchTerm.ToLower();
+            var filteredProducts = products.Where(p => p.Name.ToLower().Contains(lowerCaseSearchTerm));
+
+            return PartialView("_ProductSearchPartial", filteredProducts);
+        }
+
+
 
         [Authorize]
         public async Task<IActionResult> UserProfile()

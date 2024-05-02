@@ -21,7 +21,6 @@ namespace DLL.Models
         public virtual Category Category { get; set; }
         public int? BrandId { get; set; }
         public virtual Brand Brand { get; set; }
-        public virtual ICollection<ProdSpec> ProdSpec { get; set; }
         public virtual ICollection<Review> Reviews { get; set; }
         public virtual ICollection<OrderItem> OrderItems { get; set; }
     }

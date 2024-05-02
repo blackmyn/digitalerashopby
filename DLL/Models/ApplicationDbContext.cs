@@ -22,7 +22,7 @@ namespace DLL.Models
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-S0U5D83;Initial Catalog=shopby;Integrated Security=True;Trust Server Certificate=True;");
+            optionsBuilder.UseSqlServer("Server=DESKTOP-S0U5D83;Initial Catalog=kursdb;Integrated Security=True;Trust Server Certificate=True;");
         }
         public DbSet<Category> Categories { get; set; }
         public DbSet<ProdSpec> ProdSpecs { get; set; }
@@ -35,25 +35,26 @@ namespace DLL.Models
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Delivery> Deliveries { get; set; }
         public DbSet<Cart> Carts { get; set; }
-       // public DbSet<ApplicationUser> Users { get; set; }
-        //public DbSet<IdentityRole> Roles { get; set; }
+        public DbSet<ApplicationUser> Users { get; set; }
+        public DbSet<IdentityRole> Roles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<ProdSpec>()
-                .HasKey(ps => new { ps.ProductId, ps.CharacteristicId });
+                .HasKey(ps => new { ps.CategoryId, ps.CharacteristicId });
 
             modelBuilder.Entity<ProdSpec>()
-                .HasOne(ps => ps.Product)
+                .HasOne(ps => ps.Category)
                 .WithMany(p => p.ProdSpec)
-                .HasForeignKey(ps => ps.ProductId);
+                .HasForeignKey(ps => ps.CategoryId);
 
             modelBuilder.Entity<ProdSpec>()
                 .HasOne(ps => ps.Specification)
                 .WithMany(s => s.ProdSpec)
                 .HasForeignKey(ps => ps.CharacteristicId);
+
             modelBuilder.Entity<Product>()
                 .HasOne(p => p.Category)
                 .WithMany(c => c.Products)
