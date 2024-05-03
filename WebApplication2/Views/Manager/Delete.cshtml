@@ -1,0 +1,38 @@
+﻿@model BLL.DTOModels.ProductDto
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Delete Product";
+}
+
+<div class="container mx-auto px-4 mt-8">
+    <div class="max-w-lg mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="px-6 py-4">
+            <h2 class="text-xl font-bold text-gray-800">Вы уверены, что хотите удалить этот товар?</h2>
+            <div class="mt-4">
+                <p><strong>Название:</strong> @Model.Name</p>
+                <p><strong>Цена:</strong> @Model.Price</p>
+            </div>
+        </div>
+        <div class="px-6 py-4 bg-gray-100 border-t border-gray-200 flex justify-end">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.Id)
+                <button type="submit" class="px-4 py-2 text-sm font-semibold text-white bg-red-500 rounded hover:bg-red-600 focus:outline-none focus:ring focus:ring-red-300">Удалить</button>
+            }
+            <a href="@Url.Action("Index")" class="ml-2 px-4 py-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded hover:bg-gray-300 focus:outline-none focus:ring focus:ring-gray-300">Отмена</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.onload = function () {
+        document.querySelector("form").addEventListener("submit", function (e) {
+            var confirmed = confirm("Вы уверены, что хотите удалить этот товар?");
+            if (!confirmed) {
+                e.preventDefault();
+            }
+        });
+    }
+</script>

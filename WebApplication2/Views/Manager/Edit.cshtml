@@ -1,0 +1,75 @@
+﻿@model BLL.DTOModels.ProductDto
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Edit Product";
+}
+
+<div class="container mx-auto px-4 mt-4 md:col-span-3">
+    <h2 class="text-2xl font-bold mb-4">Изменение товара</h2>
+
+    @using (Html.BeginForm("Edit", "Manager", FormMethod.Post))
+    {
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="mb-4">
+            <label for="Name" class="block text-gray-700 font-bold mb-2">Название</label>
+            @Html.TextBoxFor(model => model.Name, new { @class = "form-input rounded-md shadow-sm" })
+        </div>
+
+        <div class="mb-4">
+            <label for="Description" class="block text-gray-700 font-bold mb-2">Описание</label>
+            @Html.TextAreaFor(model => model.Description, new { @class = "form-textarea rounded-md shadow-sm" })
+        </div>
+
+        <div class="mb-4">
+            <label for="Price" class="block text-gray-700 font-bold mb-2">Цена</label>
+            @Html.TextBoxFor(model => model.Price, new { @class = "form-input rounded-md shadow-sm" })
+        </div>
+        <div class="mb-4">
+            <label for="Price" class="block text-gray-700 font-bold mb-2">Ссылка на картинку</label>
+            @Html.TextBoxFor(model => model.ImageUrl, new { @class = "form-input rounded-md shadow-sm" })
+        </div>
+
+        <div class="mb-4">
+            <label for="Category" class="block text-gray-700 font-bold mb-2">Категория</label>
+            <select name="CategoryId" id="Category" class="form-select rounded-md shadow-sm">
+                @foreach (var category in ViewBag.Categories)
+                {
+                    <option value="@category.Id">@category.Name</option>
+                }
+            </select>
+        </div>
+
+        <div class="mb-4">
+            <label for="Brand" class="block text-gray-700 font-bold mb-2">Бренд</label>
+            <select name="BrandId" id="Brand" class="form-select rounded-md shadow-sm">
+                @foreach (var brand in ViewBag.Brands)
+                {
+                    <option value="@brand.Id">@brand.Name</option>
+                }
+            </select>
+        </div>
+
+        <button type="submit" onclick="proceedEdit()" class="bg-gray-800 hover:bg-gray-900 text-white py-2 px-4 rounded">
+            Сохранить
+        </button>
+
+        <button type="button" onclick="cancelEdit()" class="bg-gray-400 hover:bg-gray-600 text-white py-2 px-4 rounded ml-2">
+            Отмена
+        </button>
+    }
+</div>
+
+<script>
+    function cancelEdit() {
+        if (confirm('Вы уверены, что хотите отменить изменения?')) {
+            window.history.back();
+        }
+    }
+    function proceedEdit() {
+        if (confirm('Вы уверены, что хотите сохранить изменения?')) {
+            window.history.back();
+        }
+    }
+</script>

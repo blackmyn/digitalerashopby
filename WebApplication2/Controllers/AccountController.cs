@@ -83,26 +83,33 @@ namespace WebApplication2.Controllers
         {
             return View();
         }
+
         [AllowAnonymous]
-        [HttpPost("/Account/Login")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> LoginAsync(LoginVM model)
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginVM model)
         {
-            var result = await signInManager.PasswordSignInAsync(model.UserName, model.Password, false, lockoutOnFailure: false);
-
-            if (result.Succeeded)
+            if (ModelState.IsValid)
             {
-                var user = await userManager.FindByNameAsync(model.UserName);
-                var roles = await userManager.GetRolesAsync(user);
-                var role = roles.FirstOrDefault();
+                var result = await signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, false);
 
-                return Ok(new { Message = "Login successful", Role = role });
+                if (result.Succeeded)
+                {
+                    var user = await userManager.FindByNameAsync(model.UserName);
+                    var roles = await userManager.GetRolesAsync(user);
+
+                    return Json(new { role = roles.FirstOrDefault() });
+                }
+                else
+                {
+                    return BadRequest("Неверное имя пользователя или пароль.");
+                }
             }
             else
             {
-                return BadRequest("Invalid login attempt");
+                return BadRequest("Неверное имя пользователя или пароль.");
             }
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -110,15 +117,12 @@ namespace WebApplication2.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Получение текущего пользователя
                 var currentUser = await userManager.GetUserAsync(User);
 
-                // Присваивание новых значений пользователя
                 currentUser.FirstName = updatedUserData.FirstName;
                 currentUser.LastName = updatedUserData.LastName;
                 currentUser.Address = updatedUserData.Address;
 
-                // Обновление пользователя в базе данных
                 var result = await userManager.UpdateAsync(currentUser);
 
                 if (result.Succeeded)

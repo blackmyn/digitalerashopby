@@ -1,11 +1,4 @@
-﻿@{
-    ViewData["Title"] = "Sign in";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-
-}
-@Html.AntiForgeryToken()
-
-<div class="container md:col-span-3 flex flex-col items-center justify-center">
+﻿<div class="container md:col-span-3 flex flex-col items-center justify-center">
     <h2 class="text-2xl font-bold mb-4">Вход</h2>
     <form id="loginForm">
         <div class="form-group">
@@ -19,58 +12,40 @@
         <button type="submit" class="btn">Войти</button>
     </form>
     <p class="mt-4 texg-lg">
-        У вас нет аккаунта?<a class="hover:text-gray-600 texg-lg" href="@Url.Action("Register", "Account")"> Зарегистрируйтесь</a>
+        У вас нет аккаунта?<a class="hover:text-gray-600 texg-lg" href="@Url.Action("Register", "Account")">Зарегистрируйтесь</a>
     </p>
     <div id="message" class="mt-3"></div>
     <br />
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script><a href="d:\gstu\4semester\courseworkigi\digitalerashopby\webapplication2\views\account\login.cshtml">d:\gstu\4semester\courseworkigi\digitalerashopby\webapplication2\views\account\login.cshtml</a>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    $('#loginForm').submit(function (event) {
-        event.preventDefault();
+    $(document).ready(function () {
+        $('#loginForm').submit(function (e) {
+            e.preventDefault();
 
-        var username = $('#username').val();
-        var password = $('#password').val();
+            var formData = {
+                username: $('#username').val(),
+                password: $('#password').val(),
+            };
 
-        $.ajax({
-            url: '/Account/Login', 
-            type: 'POST',
-            headers: {
-                RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
-            },
-            data: {
-                username: username,
-                password: password
-            },
-            success: function (response) {
-                $('#message').text(response.Message);
-                var redirectUrl = determineRedirectUrl(response.Role);
-                
-                              setTimeout(function () {
-                    window.location.href = redirectUrl;
-                }, 2000);
-            },
-            error: function (xhr, status, error) {
-
-                var errorMessage = xhr.responseText || "Нет такого аккаунта, попробуйте еще раз!";
-                $('#message').text(errorMessage);
-                $('#message').addClass('text-danger');
-            }
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Login", "Account")',
+                data: formData,
+                success: function (response) {
+                    if (response.role === 'Manager') {
+                        window.location.href = '/Manager/Index';
+                    } else if (response.role === 'Client') {
+                        window.location.href = '/Home/Index';
+                    } else {
+                        $('#message').html('Не удалось определить роль пользователя.');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    $('#message').html(xhr.responseText);
+                }
+            });
         });
-
-        function determineRedirectUrl(role) {
-            switch (role) {
-                case 'StatisticManager':
-                    return '/Home/Index';
-                case 'Manager':
-                    return '/Home/ManagerClient';
-                case 'Client':
-                    return '/Home/Index';
-                case 'Admin':
-                    return '/Client/Index';
-                default:
-                    return '/Home/Index';
-            }
-        }
     });
 </script>

@@ -1,0 +1,37 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Manager";
+}
+<div class="container mx-auto px-4 mt-4 md:col-span-3">
+    <h1 class="text-2xl font-bold text-center mb-8">Управление Товарами</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-lg shadow-md p-6 flex flex-col justify-between">
+            <span class="text-4xl text-blue-500 material-icons mb-4">category</span>
+            <div>
+                <h2 class="text-lg font-semibold mb-2">Управление каталогом товаров</h2>
+                <p class="text-gray-600">Добавление, удаление и изменение товаров в каталоге.</p>
+            </div>
+            <a href="@Url.Action("Products", "Manager")" class="text-blue-500 font-semibold mt-4 inline-block self-end hover:text-blue-700">Перейти</a>
+
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6 flex flex-col justify-between">
+            <span class="text-4xl text-green-500 material-icons mb-4">store</span>
+            <div>
+                <h2 class="text-lg font-semibold mb-2">Управление категориями и подкатегориями</h2>
+                <p class="text-gray-600">Создание, редактирование и удаление категорий товаров.</p>
+            </div>
+            <a href="@Url.Action("Categories", "Manager")" class="text-green-500 font-semibold mt-4 inline-block self-end hover:text-green-700">Перейти</a>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6 flex flex-col justify-between">
+            <span class="text-4xl text-red-500 material-icons mb-4">label</span>
+            <div>
+                <h2 class="text-lg font-semibold mb-2">Управление брендами товаров</h2>
+                <p class="text-gray-600">Добавление и изменение брендов товаров.</p>
+            </div>
+            <a href="@Url.Action("Brands", "Manager")" class="text-red-500 font-semibold mt-4 inline-block self-end hover:text-red-700">Перейти</a>
+        </div>
+    </div>
+</div>

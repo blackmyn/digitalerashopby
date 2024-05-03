@@ -1,0 +1,111 @@
+﻿@model IEnumerable<BLL.DTOModels.BrandDto>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Manager";
+}
+
+<div class="container mx-auto px-4 mt-4 md:col-span-3">
+    <h2 class="text-2xl font-bold mb-4">Список брендов</h2>
+    <div class="flex justify-between items-center mb-4">
+        <button id="showAddCategoryPanel" class="bg-gray-800 hover:bg-gray-900 text-white py-2 px-4 rounded">Добавить новый бренд</button>
+    </div>
+    <div class="grid grid-cols-2 gap-4">
+        <div>
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Название
+                        </th>
+                        <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Действия
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    @foreach (var category in Model.Take(10))
+                    {
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm font-medium text-gray-900">@category.Name</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <a href="@Url.Action("EditBrand", new { id = category.Id })" class="text-indigo-600 hover:text-indigo-900">Изменить</a>
+                                <a href="#" class="text-red-600 hover:text-red-900 ml-2 delete-category" data-category-id="@category.Id">Удалить</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <div id="addCategoryPanel" style="display: none;">
+                <div>
+                    <form method="post" action="@Url.Action("CreateBrand")">
+                        <div class="mb-4">
+                            <label for="categoryName" class="block text-sm font-medium text-gray-700">Название бренда</label>
+                            <input type="text" id="categoryName" name="Name" class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        </div>
+                        <div class="mt-6">
+                            <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-gray-800 hover:bg-gray-900 rounded-md">Добавить</button>
+                            <button type="button" id="hideAddCategoryPanel" class="ml-2 px-4 py-2 text-sm font-medium text-white bg-gray-500 hover:bg-gray-700 rounded-md">Скрыть</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="flex justify-center mt-4">
+        @if (ViewBag.CurrentPage > 1)
+        {
+            <a href="@Url.Action("Brands", new { page = ViewBag.CurrentPage - 1 })" class="px-4 py-2 text-sm font-medium text-indigo-600 bg-indigo-100 hover:bg-indigo-200 rounded-md">Предыдущая</a>
+        }
+
+        @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+        {
+            <a href="@Url.Action("Brands", new { page = ViewBag.CurrentPage + 1 })" class="px-4 py-2 text-sm font-medium text-indigo-600 bg-indigo-100 hover:bg-indigo-200 rounded-md ml-2">Следующая</a>
+        }
+    </div>
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const showAddCategoryPanelBtn = document.getElementById('showAddCategoryPanel');
+        const addCategoryPanel = document.getElementById('addCategoryPanel');
+        const hideAddCategoryPanelBtn = document.getElementById('hideAddCategoryPanel');
+
+        showAddCategoryPanelBtn.addEventListener('click', function () {
+            addCategoryPanel.style.display = 'block';
+        });
+
+        hideAddCategoryPanelBtn.addEventListener('click', function () {
+            addCategoryPanel.style.display = 'none';
+        });
+
+        const deleteCategoryLinks = document.querySelectorAll('.delete-category');
+        deleteCategoryLinks.forEach(function (link) {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+                const categoryId = link.getAttribute('data-category-id');
+                const confirmDelete = confirm('Вы уверены, что хотите удалить этот бренд?');
+                if (confirmDelete) {
+                    fetch(`/Manager/DeleteBrand/${categoryId}`, {
+                        method: 'POST'
+                    })
+                        .then(response => {
+                            if (response.ok) {
+                                window.location.reload();
+                            } else {
+                                console.error('Ошибка удаления бренда');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Ошибка удаления бренда:', error);
+                        });
+                }
+            });
+        });
+    });
+</script>

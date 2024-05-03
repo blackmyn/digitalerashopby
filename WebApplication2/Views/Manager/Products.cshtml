@@ -1,0 +1,58 @@
+﻿@model IEnumerable<BLL.DTOModels.ProductDto>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Manager";
+}
+
+
+<div class="container mx-auto px-4 mt-4 md:col-span-3">
+
+    <h2 class="text-2xl font-bold mb-4">Список товаров</h2>
+    <div class="mt-4">
+        <a href="@Url.Action("Create")" class="bg-gray-800 hover:bg-gray-900 text-white py-2 px-4 rounded">Добавить новый товар</a>
+    </div>
+    <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+            <tr>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th scope="col" class="relative px-6 py-3">
+                    <span class="sr-only">Действия</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+            @foreach (var item in Model.Take(10))
+            {
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm font-medium text-gray-900">@((item.Name.Length > 65) ? (item.Name.Substring(0, 65) + "...") : item.Name)</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-900"> @Html.DisplayFor(modelItem => item.Price)</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <a href="@Url.Action("Edit", new { id = item.Id })" class="text-indigo-600 hover:text-indigo-900">Изменить</a>
+                        <a href="@Url.Action("Delete", new { id = item.Id })" class="text-red-600 hover:text-red-900 ml-2">Удалить</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="flex justify-center mt-4">
+        @if (ViewBag.CurrentPage > 1)
+        {
+            <a href="@Url.Action("Products", new { page = ViewBag.CurrentPage - 1 })" class="px-4 py-2 text-sm font-medium text-indigo-600 bg-indigo-100 hover:bg-indigo-200 rounded-md">Предыдущая</a>
+        }
+
+        @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+        {
+            <a href="@Url.Action("Products", new { page = ViewBag.CurrentPage + 1 })" class="px-4 py-2 text-sm font-medium text-indigo-600 bg-indigo-100 hover:bg-indigo-200 rounded-md ml-2">Следующая</a>
+        }
+    </div>
+</div>

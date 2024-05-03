@@ -1,7 +1,13 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity;
+@using DLL.Models
+
+@inject SignInManager<ApplicationUser> signInManager
+@{
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
 
 <div class="md:col-span-3 p-4">
     <div>
@@ -10,7 +16,6 @@
     <div class="w-max">
         <h2 class="text-lg border-b-2 border-solid border-gray-600 font-bold mt-8">МОНИТОРЫ BENQ</h2>
     </div>
-
     <div class="md:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="bg-white shadow-lg rounded-lg overflow-hidden product-card">
             <img src="/BenQ-MOBIUZ-EX2510S-HDR10-FreeSync-165-Hz-IPS-Gaming-Monitor-300x300.jpg" alt="Продукт" class="w-full h-54 object-cover">
@@ -28,10 +33,10 @@
             <img src="/BenQ-PD2705Q-DesignVue-Designer-HDR-IPS-Monitor-300x300.jpg" alt="Продукт" class="w-full h-54 object-cover">
             <div class="p-4">
                 <a href="@Url.Action("Details", "Product", new { id = 1 })">
-                <h2 class="text-xl font-bold text-gray-800">BenQ PD2705Q DesignVue Designer 27″ 16:9 HDR IPS Monitor</h2>
-                <p class="mt-2 text-gray-600">27″ 16:9 4K IPS Monitor</p>
-                <div class="mt-4 flex justify-between items-center">
-                    <span class="font-bold text-gray-800">Цена: $109.99</span>
+                    <h2 class="text-xl font-bold text-gray-800">BenQ PD2705Q DesignVue Designer 27″ 16:9 HDR IPS Monitor</h2>
+                    <p class="mt-2 text-gray-600">27″ 16:9 4K IPS Monitor</p>
+                    <div class="mt-4 flex justify-between items-center">
+                        <span class="font-bold text-gray-800">Цена: $109.99</span>
                         <a href="@Url.Action("Details", "Product", new { id = 2 })" class="px-4 py-2 text-white rounded bg-gray-800 hover:bg-black-600">Купить</a>
                     </div>
             </div>
@@ -40,10 +45,10 @@
             <img src="/BenQ-Zowie-XL2566K-25-Inch-E-Sports-Gaming-Monitor-300x300.jpg" alt="Продукт" class="w-full h-54 object-cover">
             <div class="p-4">
                 <a href="@Url.Action("Details", "Product", new { id = 1 })">
-                <h2 class="text-xl font-bold text-gray-800">BenQ Zowie XL2566K 25 Inch E-Sports Gaming Monitor</h2>
-                <p class="mt-2 text-gray-600">25 Inch E-Sports Gaming Monitor</p>
-                <div class="mt-4 flex justify-between items-center">
-                    <span class="font-bold text-gray-800">Цена: $259.99</span>
+                    <h2 class="text-xl font-bold text-gray-800">BenQ Zowie XL2566K 25 Inch E-Sports Gaming Monitor</h2>
+                    <p class="mt-2 text-gray-600">25 Inch E-Sports Gaming Monitor</p>
+                    <div class="mt-4 flex justify-between items-center">
+                        <span class="font-bold text-gray-800">Цена: $259.99</span>
                         <a href="@Url.Action("Details", "Product", new { id = 3 })" class="px-4 py-2 text-white rounded bg-gray-800 hover:bg-black-600">Купить</a>
                     </div>
             </div>

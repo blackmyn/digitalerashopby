@@ -1,0 +1,49 @@
+﻿@model BLL.DTOModels.ProductDto
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Добавить товар";
+}
+
+<div class="container mx-auto px-4 mt-4 md:col-span-3">
+    <h2 class="text-2xl font-bold mb-4">Добавить товар</h2>
+    <form method="post" action="@Url.Action("Create")" class="max-w-md">
+        <div class="mb-4">
+            <label for="name" class="block text-sm font-medium text-gray-700">Название</label>
+            <input type="text" id="name" name="Name" class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+        </div>
+        <div class="mb-4">
+            <label for="description" class="block text-sm font-medium text-gray-700">Описание</label>
+            <textarea id="description" name="Description" class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></textarea>
+        </div>
+        <div class="mb-4">
+            <label for="price" class="block text-sm font-medium text-gray-700">Цена</label>
+            <input type="number" id="price" name="Price" class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+        </div>
+        <div class="mb-4">
+            <label for="imageUrl" class="block text-sm font-medium text-gray-700">Ссылка на картинку</label>
+            <input type="text" id="imageUrl" name="ImageUrl" class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+        </div>
+
+        <div class="mb-4">
+            <label for="category" class="block text-sm font-medium text-gray-700">Категория</label>
+            <select id="category" name="CategoryId" class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                @foreach (var category in ViewBag.Categories)
+                {
+                    <option value="@category.Id">@category.Name</option>
+                }
+            </select>
+        </div>
+        <div class="mb-4">
+            <label for="brand" class="block text-sm font-medium text-gray-700">Бренд</label>
+            <select id="brand" name="BrandId" class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                @foreach (var brand in ViewBag.Brands)
+                {
+                    <option value="@brand.Id">@brand.Name</option>
+                }
+            </select>
+        </div>
+        <div class="mt-6">
+            <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-gray-800 hover:bg-gray-900 rounded-md">Добавить</button>
+        </div>
+    </form>
+</div>

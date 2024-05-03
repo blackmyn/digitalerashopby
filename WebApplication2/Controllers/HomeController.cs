@@ -32,6 +32,10 @@ namespace WebApplication2.Controllers
         {
             return View();
         }
+        public IActionResult UnauthorizedView()
+        {
+            return View();
+        }
 
         public IActionResult Privacy()
         {

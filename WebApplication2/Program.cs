@@ -74,16 +74,16 @@ var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-var roleManager = scope.ServiceProvider.GetRequiredService<Microsoft.AspNetCore.Identity.RoleManager<IdentityRole>>();
-var roles = new[] { "Administrator", "StatisticManager", "Client", "Manager" };
+    var roleManager = scope.ServiceProvider.GetRequiredService<Microsoft.AspNetCore.Identity.RoleManager<IdentityRole>>();
+    var roles = new[] { "Administrator", "StatisticManager", "Client", "Manager" };
 
-foreach (var role in roles)
-{
-if (!await roleManager.RoleExistsAsync(role))
-{
-await roleManager.CreateAsync(new IdentityRole(role));
-}
-}
+    foreach (var role in roles)
+    {
+        if (!await roleManager.RoleExistsAsync(role))
+        {
+            await roleManager.CreateAsync(new IdentityRole(role));
+        }
+    }
 }
 using (var scope = app.Services.CreateScope())
 {
@@ -100,6 +100,17 @@ using (var scope = app.Services.CreateScope())
     string email3 = "manager@mail.ru";
     string password3 = "Manager1!";
     string name3 = "Manager1";
+    if (await userManager.FindByEmailAsync(email3) == null)
+    {
+        var user3 = new ApplicationUser();
+        user3.Email = email3;
+        user3.UserName = email3;
+        user3.FirstName = "Никита";
+        user3.LastName = "Сергеенко";
+        user3.Address = "ул. Зеленая, д.12 кв.143";
+        await userManager.CreateAsync(user3, password3);
+        await userManager.AddToRoleAsync(user3, "Manager");
+    }
     if (await userManager.FindByEmailAsync(email) == null)
     {
         var user = new ApplicationUser();
@@ -135,35 +146,25 @@ using (var scope = app.Services.CreateScope())
         await userManager.CreateAsync(user1, password1);
         await userManager.AddToRoleAsync(user1, "StatisticManager");
     }
-    if (await userManager.FindByEmailAsync(email3) == null)
-    {
-        var user3 = new ApplicationUser();
-        user3.Email = email1;
-        user3.UserName = email1;
-        user3.FirstName = "Никита";
-        user3.LastName = "Сергеенко";
-        user3.Address = "ул. Зеленая, д.12 кв.143";
-        await userManager.CreateAsync(user3, password1);
-        await userManager.AddToRoleAsync(user3, "Manager");
-    }
+
 }
-    // Configure the HTTP request pipeline.
-    if (!app.Environment.IsDevelopment())
-    {
-        app.UseExceptionHandler("/Home/Error");
-        // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-        app.UseHsts();
-    }
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Home/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
+}
 
-    app.UseHttpsRedirection();
-    app.UseStaticFiles();
+app.UseHttpsRedirection();
+app.UseStaticFiles();
 
-    app.UseRouting();
+app.UseRouting();
 
-    app.UseAuthorization();
+app.UseAuthorization();
 
-    app.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
-    app.Run();
+app.Run();

@@ -144,10 +144,26 @@
     <nav class="bg-white shadow">
         <div class="container mx-auto py-4 pl-4 flex justify-between items-center">
             <div>
-                <a href="@Url.Action("Index", "Home")">
-                    <img src="~/pixelplanet-high-resolution-logo.png" alt="Альтернативный текст" class="h-12" />
-                </a>
+                @if (User.IsInRole("Manager"))
+                {
+                    <a href="@Url.Action("Index", "Manager")">
+                        <img src="~/pixelplanet-high-resolution-logo.png" alt="Альтернативный текст" class="h-12" />
+                    </a>
+                }
+                else if (User.IsInRole("Client"))
+                {
+                    <a href="@Url.Action("Index", "Home")">
+                        <img src="~/pixelplanet-high-resolution-logo.png" alt="Альтернативный текст" class="h-12" />
+                    </a>
+                }
+                else
+                {
+                    <a href="@Url.Action("Index", "Home")">
+                        <img src="~/pixelplanet-high-resolution-logo.png" alt="Альтернативный текст" class="h-12" />
+                    </a>
+                }
             </div>
+
             <div class="flex-grow ml-10 mr-4">
                 <div class="relative flex">
                     <input type="text" id="searchInput" placeholder="Найти что-то..." class="border-solid border-gray-800 py-2 pl-4 rounded-l-md focus:outline-none focus:border-purple-900 transition duration-150 ease-in-out search-input">

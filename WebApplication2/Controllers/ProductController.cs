@@ -27,6 +27,17 @@ namespace WebApplication2.Controllers
             _brandService = brandService;
             _userManager = userManager;
         }
+        public ActionResult Index()
+        {
+            var products = _productService.GetAll();
+            return View(products);
+        }
+
+        public ActionResult Delete(int id)
+        {
+             _productService.DeleteById(id);
+            return RedirectToAction(nameof(Index));
+        }
 
         public async Task<IActionResult> Details(int id)
         {
@@ -51,7 +62,6 @@ namespace WebApplication2.Controllers
                 characteristicNames.Add(characteristicName);
             }
 
-            // Передача данных в представление через ViewData
             ViewData["Specifications"] = specifications;
             ViewData["CharacteristicNames"] = characteristicNames;
             ViewData["Category"] = categoryDto.Name;
@@ -68,11 +78,9 @@ namespace WebApplication2.Controllers
             ViewData["User"] = user.FirstName + user.LastName;
             if (user == null)
             {
-                // Пользователь не аутентифицирован, обработка ошибки или перенаправление на страницу входа
                 return RedirectToAction("Login", "Account");
             }
 
-            // Сохранение отзыва в базу данных или другое необходимое действие
             var reviewDto = new ReviewDto
             {
                 ProductId = productId,
@@ -82,7 +90,6 @@ namespace WebApplication2.Controllers
             };
             _reviewService.Add(reviewDto);
 
-            // Перенаправление обратно на страницу с деталями товара
             return RedirectToAction("Details", new { id = productId });
         }
         [HttpGet("Search")]
